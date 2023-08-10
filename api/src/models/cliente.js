@@ -14,7 +14,7 @@ const clienteSchema = new mongoose.Schema({
     required: true,
     
   },
-    telefono: String,
+    telefono: Number,
   
   fechaRegistro: {
     type: Date,
