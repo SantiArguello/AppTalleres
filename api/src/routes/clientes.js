@@ -3,7 +3,7 @@ const router = express.Router();
 const Cliente = require("../models/cliente");
 
 // Ruta para crear un nuevo cliente
-router.post("/clientes", async (req, res) => {
+router.post("/cliente", async (req, res) => {
   try {
     const nuevoCliente = new Cliente(req.body);
     await nuevoCliente.save();
@@ -24,6 +24,24 @@ router.get("/clientes", async (req, res) => {
     res
       .status(500)
       .json({ message: "Error al obtener los clientes", error: error.message });
+  }
+});
+
+router.put("/cliente/:id", async (req, res) => {
+  try {
+    const clienteId = req.params.id;
+    const datosActualizados = req.body;
+
+    const clienteExistente = await Cliente.findById(clienteId);
+    if (!clienteExistente) {
+      throw new Error("Cliente no encontrado");
+    }
+    
+    clienteExistente.set(datosActualizados);
+    await clienteExistente.save();
+    res.status(200).json(clienteExistente);
+  } catch (error) {
+    res.status(404).json({ message: "Error al actualizar el cliente", error: error.message });
   }
 });
 
