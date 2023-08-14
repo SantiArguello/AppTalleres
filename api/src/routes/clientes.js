@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Cliente = require("../models/cliente");
+const Cliente = require("../models/Clientes/cliente.js");
 
 // Ruta para crear un nuevo cliente
 router.post("/cliente", async (req, res) => {
