@@ -4,6 +4,7 @@ const morgan = require("morgan")
 
 
 const clientes = require('./routes/clientes');
+const motos = require('./routes/moto')
 // Importar más rutas si las tienes
 
 
@@ -20,6 +21,7 @@ app.use(morgan("dev"))
 // Usar tus rutas
 app.use('/', clientes);
 // Agregar más rutas aquí si las tienes
+app.use('/', motos)
 
 // Iniciar el servidor
 app.listen(PORT, () => {
