@@ -6,6 +6,7 @@ const morgan = require("morgan")
 const clientes = require('./routes/clientes');
 const motos = require('./routes/moto')
 const agenda = require('./routes/agenda')
+const motoFiltrado = require('./routes/motoFiltrado')
 // Importar más rutas si las tienes
 
 
@@ -24,6 +25,7 @@ app.use('/', clientes);
 // Agregar más rutas aquí si las tienes
 app.use('/', motos)
 app.use('/', agenda)
+app.use('/', motoFiltrado)
 
 // Iniciar el servidor
 app.listen(PORT, () => {
