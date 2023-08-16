@@ -18,12 +18,10 @@ router.put("/motoFiltrado/:id", async (req, res) => {
 
     res.status(200).json(motoFiltradoActualizada);
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "Error al actualizar la moto filtrada",
-        error: error.message,
-      });
+    res.status(400).json({
+      message: "Error al actualizar la moto filtrada",
+      error: error.message,
+    });
   }
 });
 
@@ -39,29 +37,30 @@ router.get("/motoFiltrado/:id", async (req, res) => {
 
     res.status(200).json(motoFiltrado);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error al obtener la moto filtrada",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error al obtener la moto filtrada",
+      error: error.message,
+    });
   }
 });
 
 // Obtener todas las motos
 router.get("/motoFiltrado", async (req, res) => {
-    try {
-      const { modelo } = req.query;
-      const query = modelo ? { modelo } : {};
-  
-      const motosFiltradas = await MotoFiltrado.find(query);
-      res.status(200).json(motosFiltradas);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: "Error al obtener las motos filtradas", error: error.message });
-    }
-  });
+  try {
+    const { modelo } = req.query;
+    const query = modelo ? { modelo } : {};
+
+    const motosFiltradas = await MotoFiltrado.find(query);
+    res.status(200).json(motosFiltradas);
+  } catch (error) {
+    res
+      .status(500)
+      .json({
+        message: "Error al obtener las motos filtradas",
+        error: error.message,
+      });
+  }
+});
 
 // Crear una nueva moto
 router.post("/motoFiltrado", async (req, res) => {
@@ -70,12 +69,26 @@ router.post("/motoFiltrado", async (req, res) => {
     await nuevaMotoFiltrado.save();
     res.status(201).json(nuevaMotoFiltrado);
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        message: "Error al crear la moto filtrada",
-        error: error.message,
-      });
+    res.status(400).json({
+      message: "Error al crear la moto filtrada",
+      error: error.message,
+    });
+  }
+});
+
+// localHost:3000/filtroPorModelo/buscar?keyword=*PALABRA*
+router.get("/filtroPorModelo/buscar", async (req, res) => {
+  try {
+    const { keyword } = req.query;
+    const query = keyword ? { modelo: { $regex: keyword, $options: "i" } } : {};
+
+    const motosFiltradas = await MotoFiltrado.find(query);
+    res.status(200).json(motosFiltradas);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener las motos filtradas",
+      error: error.message,
+    });
   }
 });
 
