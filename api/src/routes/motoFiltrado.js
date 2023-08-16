@@ -53,12 +53,10 @@ router.get("/motoFiltrado", async (req, res) => {
     const motosFiltradas = await MotoFiltrado.find(query);
     res.status(200).json(motosFiltradas);
   } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error al obtener las motos filtradas",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Error al obtener las motos filtradas",
+      error: error.message,
+    });
   }
 });
 
@@ -87,6 +85,27 @@ router.get("/filtroPorModelo/buscar", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       message: "Error al obtener las motos filtradas",
+      error: error.message,
+    });
+  }
+});
+
+//Elimina la motoFiltrada por su ID
+router.delete("/motoFiltrado/:id", async (req, res) => {
+  try {
+    const motoFiltradoId = req.params.id;
+    const motoFiltradoEliminada = await MotoFiltrado.findByIdAndDelete(
+      motoFiltradoId
+    );
+
+    if (!motoFiltradoEliminada) {
+      return res.status(404).json({ message: "Moto filtrada no encontrada" });
+    }
+
+    res.status(200).json({ message: "Moto filtrada eliminada exitosamente" });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al eliminar la moto filtrada",
       error: error.message,
     });
   }
