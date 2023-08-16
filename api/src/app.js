@@ -8,6 +8,8 @@ const motos = require('./routes/moto')
 const trabajoFiltrado = require('./routes/trabajoFiltrado')
 const repuestosInsumos = require('./routes/repuestosInsumos')
 const service = require('./routes/service')
+const agenda = require('./routes/agenda')
+const motoFiltrado = require('./routes/motoFiltrado')
 
 // Importar más rutas si las tienes
 
@@ -24,11 +26,14 @@ app.use(morgan("dev"))
 
 // Usar tus rutas
 app.use('/clientes', clientes);
-app.use('/motos', motos)
+
 app.use('/trabajoFiltrado', trabajoFiltrado)
 app.use('/repuestosInsumos', repuestosInsumos)
 app.use('/service', service)
+app.use('/', agenda)
+app.use('/', motoFiltrado)
 // Agregar más rutas aquí si las tienes
+
 
 // Iniciar el servidor
 app.listen(PORT, () => {
