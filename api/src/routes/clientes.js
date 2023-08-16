@@ -36,12 +36,17 @@ router.put("/cliente/:id", async (req, res) => {
     if (!clienteExistente) {
       throw new Error("Cliente no encontrado");
     }
-    
+
     clienteExistente.set(datosActualizados);
     await clienteExistente.save();
     res.status(200).json(clienteExistente);
   } catch (error) {
-    res.status(404).json({ message: "Error al actualizar el cliente", error: error.message });
+    res
+      .status(404)
+      .json({
+        message: "Error al actualizar el cliente",
+        error: error.message,
+      });
   }
 });
 
