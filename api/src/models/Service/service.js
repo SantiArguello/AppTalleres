@@ -5,18 +5,18 @@ const serviceSchema = new mongoose.Schema({
         type: Date,
     },
     cliente: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Cliente'
     },
     moto: {
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Moto'
     },
     detalles: {
         type: String,
     },
     repuestos: [{
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'RepuestoInsumo'
     }],
     precio: {

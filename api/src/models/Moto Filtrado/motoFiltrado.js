@@ -7,6 +7,6 @@ const motoFiltradoSchema = new mongoose.Schema({
   },
 });
 
-const MotoFiltrado = mongoose.model("Moto Filtrado", motoFiltradoSchema);
+const MotoFiltrado = mongoose.model("MotoFiltrado", motoFiltradoSchema);
 
 module.exports = MotoFiltrado;

@@ -10,7 +10,7 @@ const repuestoInsumoSchema = new mongoose.Schema({
         type: Number,
     },
     motoFiltrado:{
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "MotoFiltrado"
     },
     precio: {
@@ -19,7 +19,7 @@ const repuestoInsumoSchema = new mongoose.Schema({
 
 })
 
-const RepuestoInsumo = mongoose.model('Repuesto', repuestoInsumoSchema);
+const RepuestoInsumo = mongoose.model('RepuestoInsumo', repuestoInsumoSchema);
 
 module.exports = RepuestoInsumo;
 
