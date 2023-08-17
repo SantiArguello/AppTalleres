@@ -5,6 +5,10 @@ const motoFiltradoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  segmento: {
+    type: String,
+    required: true,
+  }
 });
 
 const MotoFiltrado = mongoose.model("MotoFiltrado", motoFiltradoSchema);
