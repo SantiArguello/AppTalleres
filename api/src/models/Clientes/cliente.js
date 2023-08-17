@@ -20,11 +20,12 @@ const clienteSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  moto: 
+  moto: [
     {
-      modelo: String,
-      patente: String,
-    },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Moto'
+    }
+  ]
   
 });
 

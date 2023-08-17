@@ -21,10 +21,10 @@ app.use(express.json());
 app.use(morgan("dev"))
 
 // Usar tus rutas
-app.use('/clientes', clientes);
-app.use('/trabajoFiltrado', trabajoFiltrado)
-app.use('/repuestosInsumos', repuestosInsumos)
-app.use('/service', service)
+app.use('/', clientes);
+app.use('/', trabajoFiltrado)
+app.use('/', repuestosInsumos)
+app.use('/', service)
 app.use('/', agenda)
 app.use('/', motoFiltrado)
 app.use('/', motos)

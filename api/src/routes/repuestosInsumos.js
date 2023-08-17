@@ -9,6 +9,7 @@ router.post("/repuesto", async (req, res) => {
   try {
     const nuevoRepuesto = new Repuesto(req.body);
     await nuevoRepuesto.save();
+    res.status(201).json(nuevoRepuesto);
   } catch (error) {
     res
       .status(400)
@@ -45,6 +46,7 @@ router.put("/repuesto/:id", async (req, res) => {
     }
     repuestoExistente.set(datosActualizados);
     await repuestoExistente.save();
+    res.status(200).json(repuestoExistente);
   } catch (error) {
     res.status(404).json({
       message: "Error al actualizar el repuesto",
