@@ -13,6 +13,10 @@ const motoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  cliente: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cliente",
+  },
 });
 
 const Motos = mongoose.model("Motos", motoSchema);
