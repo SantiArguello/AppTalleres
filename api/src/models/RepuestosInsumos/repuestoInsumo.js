@@ -6,7 +6,7 @@ const repuestoInsumoSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    cantidad: {
+    stock: {
         type: Number,
     },
     motoFiltrado:{
