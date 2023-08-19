@@ -1,31 +1,36 @@
 const mongoose = require('mongoose');
 
 const serviceSchema = new mongoose.Schema({
-    fecha: {
-        type: Date,
+  fecha: {
+    type: Date,
+  },
+  cliente: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Cliente'
+  },
+  moto: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Moto'
+  },
+  detalles: {
+    type: String,
+  },
+  cantidadRepuestos: [{
+    repuesto: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'RepuestoInsumo'
     },
-    cliente: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cliente'
-    },
-    moto: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Moto'
-    },
-    detalles: {
-        type: String,
-    },
-    repuestos: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'RepuestoInsumo'
-    }],
-    precio: {
-        type: Number,
-    },
-    kilometros: {
-        type: Number,
+    cantidad: {
+      type: Number,
     }
-})
+  }],
+  precio: {
+    type: Number,
+  },
+  kilometros: {
+    type: Number,
+  }
+});
 
 const Service = mongoose.model('Service', serviceSchema);
 module.exports = Service;
