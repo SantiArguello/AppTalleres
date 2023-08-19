@@ -29,7 +29,7 @@ router.post("/moto", async (req, res) => {
 
 router.get("/moto", async (req, res) => {
   try {
-    const motos = await Moto.find();
+    const motos = await Moto.find().populate("cliente"); // populate para ver info en lugar de ID's
     res.status(200).json(motos);
   } catch (error) {
     res
