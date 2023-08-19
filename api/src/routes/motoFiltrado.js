@@ -78,7 +78,7 @@ router.post("/motoFiltrado", async (req, res) => {
 router.get("/filtroPorModelo/buscar", async (req, res) => {
   try {
     const { keyword } = req.query;
-    const query = keyword ? { modelo: { $regex: keyword, $options: "i" } } : {};
+    const query = keyword ? { segmento: { $regex: keyword, $options: "i" } } : {};
 
     const motosFiltradas = await MotoFiltrado.find(query);
     res.status(200).json(motosFiltradas);
