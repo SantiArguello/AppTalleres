@@ -6,8 +6,8 @@ const agendaSchema = new mongoose.Schema({
     required: true,
   },
   nombre: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Cliente",
+    type: mongoose.Schema.Types.Mixed,
+    ref: "Cliente"
   },
   motoFiltrado: {
     type: mongoose.Schema.Types.ObjectId,
