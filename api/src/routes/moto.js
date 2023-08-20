@@ -31,7 +31,9 @@ router.get("/moto/:clienteId", async (req, res) => {
   try {
     const clienteId = req.params.clienteId;
 
-    const motos = await Moto.find({ cliente: clienteId });
+    // Consulta para obtener las motos filtradas por el cliente
+    const motos = await Moto.find({ cliente: clienteId }).populate('motoFiltrado');
+
     res.status(200).json(motos);
   } catch (error) {
     res
