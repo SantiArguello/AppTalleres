@@ -27,9 +27,11 @@ router.post("/moto", async (req, res) => {
   }
 });
 
-router.get("/moto", async (req, res) => {
+router.get("/moto/:clienteId", async (req, res) => {
   try {
-    const motos = await Moto.find().populate("cliente"); // populate para ver info en lugar de ID's
+    const clienteId = req.params.clienteId;
+
+    const motos = await Moto.find({ cliente: clienteId });
     res.status(200).json(motos);
   } catch (error) {
     res
