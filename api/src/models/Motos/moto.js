@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const motoSchema = new mongoose.Schema({
-  motoFiltrado: {
+  modelo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "MotoFiltrado",
   },
