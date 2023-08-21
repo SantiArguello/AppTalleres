@@ -27,8 +27,6 @@ router.get("/clientes", async (req, res) => {
   }
 });
 
-
-
 router.put("/cliente/:id", async (req, res) => {
   try {
     const clienteId = req.params.id;
@@ -43,32 +41,40 @@ router.put("/cliente/:id", async (req, res) => {
     await clienteExistente.save();
     res.status(200).json(clienteExistente);
   } catch (error) {
-    res
-      .status(404)
-      .json({
-        message: "Error al actualizar el cliente",
-        error: error.message,
-      });
+    res.status(404).json({
+      message: "Error al actualizar el cliente",
+      error: error.message,
+    });
   }
 });
-
 
 //ruta para obtener clientes por nombre y o apellido
 router.get("/clientes/buscar", async (req, res) => {
   try {
     const searchTerm = req.query.search; // Obtener el término de búsqueda de los query parameters
-    
+
     // Utilizar una expresión regular para buscar coincidencias en nombre y apellido
     const searchRegex = new RegExp(searchTerm, "i");
-    
+
     // Buscar clientes que coincidan con el término en nombre o apellido
     const clientesEncontrados = await Cliente.find({
-      $or: [{ nombre: { $regex: searchRegex } }, { apellido: { $regex: searchRegex } }],
+      $or: [
+        { nombre: { $regex: searchRegex } },
+        { apellido: { $regex: searchRegex } },
+      ],
+    }).populate({
+      path: "moto",
+      populate: {
+        path: "modelo",
+        select: "modelo segmento", // Aquí seleccionamos solo los campos que queremos mostrar
+      },
     });
-    
+
     res.status(200).json(clientesEncontrados);
   } catch (error) {
-    res.status(500).json({ message: "Error en la búsqueda", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error en la búsqueda", error: error.message });
   }
 });
 
