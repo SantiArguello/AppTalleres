@@ -16,7 +16,10 @@ router.post("/agenda", async (req, res) => {
 
 router.get("/agenda", async (req, res) => {
   try {
-    const agendas = await Agenda.find();
+ const agendas = await Agenda.find()
+      .populate("nombre")
+      .populate("motoFiltrado")
+      .populate("trabajo");
     res.status(200).json(agendas);
   } catch (error) {
     res
