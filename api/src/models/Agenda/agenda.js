@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const agendaSchema = new mongoose.Schema({
   fecha: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   nombre: {
     type: mongoose.Schema.Types.Mixed,
@@ -11,11 +11,11 @@ const agendaSchema = new mongoose.Schema({
   },
   motoFiltrado: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "motoFiltrado",
+    ref: "MotoFiltrado",
   },
   trabajo: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "trabajoFiltrado",
+    ref: "TrabajoFiltrado",
   },
 });
 
