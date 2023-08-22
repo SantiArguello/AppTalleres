@@ -78,6 +78,23 @@ router.get("/clientes/buscar", async (req, res) => {
   }
 });
 
-// ... Otras rutas y operaciones CRUD aquí
+router.delete("/cliente/:id", async (req, res) => {
+  try {
+    const clienteId = req.params.id;
+
+    const clienteEliminado = await Cliente.findByIdAndDelete(clienteId);
+    if (!clienteEliminado) {
+      throw new Error("Cliente no encontrado");
+    }
+
+    res.status(200).json({ message: "Cliente eliminado exitosamente" });
+  } catch (error) {
+    res.status(404).json({
+      message: "Error al eliminar el cliente",
+      error: error.message,
+    });
+  }
+});
+
 
 module.exports = router;
