@@ -13,10 +13,8 @@ const motoFiltrado = require("./routes/motoFiltrado");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Conectar a la base de datos (en los test se conecta a la db local)
-if (process.env.NODE_ENV !== "test") {
-	connectToDatabase();
-}
+// Conectar a la base de datos
+connectToDatabase();
 
 // Configurar middlewares y rutas
 app.use(express.json());
@@ -35,5 +33,3 @@ app.use("/", motos);
 app.listen(PORT, () => {
 	console.log(`Servidor Express escuchando en el puerto ${PORT}`);
 });
-
-module.exports = app;
