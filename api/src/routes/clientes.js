@@ -78,6 +78,6 @@ router.get("/clientes/buscar", async (req, res) => {
   }
 });
 
-
+// ... Otras rutas y operaciones CRUD aquí
 
 module.exports = router;
