@@ -83,4 +83,6 @@ router.put("/service/:id", async (req, res) => {
   }
 });
 
+// nueva ruta aqui
+
 module.exports = router;
