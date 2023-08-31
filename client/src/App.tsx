@@ -1,9 +1,11 @@
-function App() {
+import { Layout } from "./layout";
+
+const App = () => {
 	return (
-		<>
-			<h1 className="text-3xl font-bold">App Talleres</h1>
-		</>
+		<Layout>
+			<h1>App Talleres</h1>
+		</Layout>
 	);
-}
+};
 
 export default App;
