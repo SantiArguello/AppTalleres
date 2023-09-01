@@ -19,7 +19,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="bg-gray-100 dark:bg-neutral-800 z-10 text-neutral-900 dark:text-neutral-100">
+		<header className="relative top-0 left-0 right-0 bg-neutral-50 dark:bg-neutral-800 z-10 text-neutral-900 dark:text-neutral-100">
 			<div className="flex justify-between mx-auto max-w-screen-xxl px-4 sm:px-6 xl:px-8 py-1">
 				<LogoBenelli />
 				<div className="flex items-center justify-end gap-4">
