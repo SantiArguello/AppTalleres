@@ -59,9 +59,7 @@ const Sidebar = () => {
 				<ul className="mt-6 space-y-1">
 					{sidebarItems.map((item) => (
 						<li key={item.name} className="flex items-center ms-2">
-							<a
-								href={item.route}
-								className="flex items-center gap-3 rounded-lg w-48 px-4 py-2 hover:bg-green-700 hover:text-neutral-100 dark:hover:bg-green-700">
+							<a href={item.route} className="flex items-center gap-3 rounded-lg w-48 px-4 py-2 hover:bg-green-700 hover:text-neutral-100">
 								{item.icon}
 								{item.name}
 							</a>
