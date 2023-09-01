@@ -1,11 +1,5 @@
-import { Layout } from "./layout";
-
 const App = () => {
-	return (
-		<Layout>
-			<h1>App Talleres</h1>
-		</Layout>
-	);
+	return <h1 className="text-2xl font-bold">App Talleres</h1>;
 };
 
 export default App;

@@ -27,7 +27,7 @@ const SwitcherTheme = () => {
 
 	return (
 		<button onClick={toggleTheme} title={`Switch to ${darkMode ? "light" : "dark"} mode`}>
-			{darkMode ? <MdLightMode w /> : <MdOutlineDarkMode />}
+			{darkMode ? <MdLightMode /> : <MdOutlineDarkMode />}
 		</button>
 	);
 };
