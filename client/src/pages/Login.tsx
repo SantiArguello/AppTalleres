@@ -17,7 +17,7 @@ export default function Login() {
             </p>
           </div>
 
-          <form action="" clasNames="mx-auto mb-0 mt-8 max-w-md space-y-4">
+          <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4">
             <div>
               <label >Email</label>
 
