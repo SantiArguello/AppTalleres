@@ -2,32 +2,21 @@ import { useState, useEffect } from "react";
 import { MdOutlineDarkMode, MdLightMode } from "react-icons/md";
 
 const SwitcherTheme = () => {
-	const [darkMode, setDarkMode] = useState<boolean>(false);
-	const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+	const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+	const icon = theme === "dark" ? <MdLightMode size={"1.5rem"} /> : <MdOutlineDarkMode size={"1.5rem"} />;
 
 	useEffect(() => {
-		const savedTheme = localStorage.getItem("theme");
-		if (savedTheme === "dark" || (!savedTheme && systemTheme)) {
-			setDarkMode(true);
-			document.documentElement.classList.add("dark");
-			localStorage.setItem("theme", "dark");
-		}
-	}, [systemTheme]);
+		document.documentElement.classList.toggle("dark", theme === "dark");
+		localStorage.setItem("theme", theme);
+	}, [theme]);
 
 	const toggleTheme = () => {
-		if (darkMode) {
-			localStorage.setItem("theme", "light");
-		} else {
-			localStorage.setItem("theme", "dark");
-		}
-
-		document.documentElement.classList.toggle("dark", !darkMode);
-		setDarkMode(!darkMode);
+		setTheme(theme === "light" ? "dark" : "light");
 	};
 
 	return (
-		<button onClick={toggleTheme} title={`Switch to ${darkMode ? "light" : "dark"} mode`}>
-			{darkMode ? <MdLightMode /> : <MdOutlineDarkMode />}
+		<button onClick={toggleTheme} title={`Cambiar al modo ${theme === "light" ? "oscuro" : "claro"}`}>
+			{icon}
 		</button>
 	);
 };

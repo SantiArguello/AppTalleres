@@ -28,7 +28,7 @@ const Header = () => {
 	};
 
 	return (
-		<header className="relative top-0 left-0 right-0 bg-neutral-50 dark:bg-neutral-800 z-10 text-neutral-900 dark:text-neutral-100">
+		<header className="relative top-0 left-0 right-0 z-10">
 			<div className="flex justify-between mx-auto max-w-screen-xxl px-4 sm:px-6 xl:px-8 py-1">
 				<LogoBenelli />
 				<div className="flex items-center justify-end gap-4">
@@ -39,8 +39,8 @@ const Header = () => {
 						<div className="flex items-center justify-center">
 							<form onSubmit={handleSubmit}>
 								<div className="relative">
-									<span className="absolute inset-y-0 left-0 flex items-center pl-2">
-										<button type="submit" className="p-1 outline-none focus:shadow-outline active:scale-75 transform transition-transform">
+									<span className="absolute inset-y-0 left-0 flex items-center pl-2 bg-inherit">
+										<button type="submit" className="p-1 focus:shadow-outline active:scale-75 transform transition-transform">
 											<MdSearch />
 										</button>
 									</span>
@@ -48,7 +48,7 @@ const Header = () => {
 										type="search"
 										name="search"
 										onChange={handleSearch}
-										className="py-2 text-sm t pl-10 outline-none dark:outline-none bg-inherit focus:ring-green-700 border-0"
+										className="py-2 text-sm t pl-10 outline-none dark:outline-none focus:ring-green-700 border-0 bg-inherit"
 										placeholder="Buscar..."
 									/>
 								</div>
@@ -74,14 +74,14 @@ const Header = () => {
 
 					{/* Boton menu */}
 
-					<div className="relative">
+					<div className="relative flex justify-center">
 						<button className="hover:text-green-700 transform transition-transform active:scale-75" onClick={handleMenu}>
 							<span className="sr-only">Menu</span>
-							{showMenu ? <MdExpandLess /> : <MdExpandMore />}
+							{showMenu ? <MdExpandLess size={"1.5rem"} /> : <MdExpandMore size={"1.5rem"} />}
 						</button>
 
 						<div
-							className={`absolute end-0 z-10 mt-5 p-1 w-48 rounded-md bg-neutral-50 shadow-md  dark:bg-neutral-800 transition ${
+							className={`absolute end-0 z-10 mt-5 p-1 w-48 rounded-md  shadow-lg  transition ${
 								showMenu ? "opacity-100 visible translate-y-2" : "opacity-0 -translate-y-2 invisible"
 							}`}
 							role="menu">

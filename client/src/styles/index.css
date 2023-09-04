@@ -1,0 +1,17 @@
+/* Import Noto Sans Font */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Setup theme colors */
+:root {
+	--color-bg-primary: #f5f5f5;
+	--color-text-primary: #262626;
+}
+
+.dark {
+	--color-bg-primary: #262626;
+	--color-text-primary: #f5f5f5;
+}

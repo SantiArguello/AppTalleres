@@ -20,7 +20,11 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true,
 
-		"types": ["vitest/globals"]
+		"types": ["vitest/globals"],
+
+		"paths": {
+			"components": ["./src/components/*"]
+		}
 	},
 	"include": ["src", "test/App.test.tsx"],
 	"references": [{ "path": "./tsconfig.node.json" }]

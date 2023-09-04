@@ -1,25 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "../layout";
 import { ErrorNotFound } from "../components";
-import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas } from "../pages";
+import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas, Login, Signup } from "../pages";
 import App from "../App";
 
 const router = createBrowserRouter([
 	{
-		path: "/signin",
-		element: (
-			<div>
-				<h1>signin</h1>
-			</div>
-		),
+		path: "/login",
+		element: <Login />,
 	},
 	{
 		path: "/signup",
-		element: (
-			<div>
-				<h1>signin</h1>
-			</div>
-		),
+		element: <Signup />,
 	},
 	{
 		path: "/",
