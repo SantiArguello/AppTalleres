@@ -25,6 +25,6 @@ const motoSchema = new mongoose.Schema({
   ],
 });
 
-const Motos = mongoose.model("Motos", motoSchema);
+const Motos = mongoose.model("Moto", motoSchema);
 
 module.exports = Motos;

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Moto = require("../models/Motos/moto");
-const Cliente = require("../models/Clientes/cliente");
+const Moto = require("../../models/Motos/moto");
+const Cliente = require("../../models/Clientes/cliente");
 
 router.post("/moto", async (req, res) => {
   try {
