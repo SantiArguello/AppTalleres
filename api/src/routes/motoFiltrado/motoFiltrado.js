@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const MotoFiltrado = require("../models/Moto Filtrado/motoFiltrado");
+const MotoFiltrado = require("../../models/Moto Filtrado/motoFiltrado");
 
 // Actualizar una moto por ID
 router.put("/motoFiltrado/:id", async (req, res) => {

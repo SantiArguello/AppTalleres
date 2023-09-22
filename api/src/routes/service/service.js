@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Service = require("../models/Service/service");
-const Moto = require("../models/Motos/moto");
-const RepuestoInsumo = require("../models/RepuestosInsumos/repuestoInsumo");
+const Service = require("../../models/Service/service");
+const Moto = require("../../models/Motos/moto");
+const RepuestoInsumo = require("../../models/RepuestosInsumos/repuestoInsumo");
 
 
 // Ruta para crear un nuevo servicio

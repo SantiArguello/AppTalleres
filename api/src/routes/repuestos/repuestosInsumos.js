@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Repuesto = require("../models/RepuestosInsumos/repuestoInsumo.js");
+const Repuesto = require("../../models/RepuestosInsumos/repuestoInsumo.js");
 
 // Ruta para crear un nuevo repuesto o insumo
 

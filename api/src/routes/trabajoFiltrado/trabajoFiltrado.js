@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const TrabajoFiltrado = require("../models/Trabajo Filtrado/trabajoFiltrado.js");
-const { route } = require("./clientes.js");
+const TrabajoFiltrado = require("../../models/Trabajo Filtrado/trabajoFiltrado.js");
+
 
 //Ruta para crear un nuevo trabajo filtrado
 
