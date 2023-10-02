@@ -41,48 +41,4 @@ router.post("/service", async (req, res) => {
   }
 });
 
-// Ruta para obtener todos los servicios
-
-router.get("/service", async (req, res) => {
-  try {
-    const servicios = await Service.find();
-    res.status(200).json(servicios);
-  } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error al obtener los servicios",
-        error: error.message,
-      });
-  }
-});
-
-// Ruta para modificar un servicio
-
-router.put("/service/:id", async (req, res) => {
-  try {
-    const servicioId = req.params.id;
-    const datosActualizados = req.body;
-
-    const servicioExistente = await Service.findById(servicioId);
-    if (!servicioExistente) {
-      throw new Error("Servicio no encontrado");
-    }
-
-    servicioExistente.set(datosActualizados);
-
-    await servicioExistente.save();
-    res.status(200).json(servicioExistente);
-  } catch (error) {
-    res
-      .status(500)
-      .json({
-        message: "Error al modificar el servicio",
-        error: error.message,
-      });
-  }
-});
-
-// nueva ruta aqui
-
 module.exports = router;
