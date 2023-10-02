@@ -19,4 +19,7 @@ router.delete("/service/:id", async (req, res) => {
     res.status(500).send("Server Error");
   }
 
- });
+});
+ 
+
+module.exports = router;

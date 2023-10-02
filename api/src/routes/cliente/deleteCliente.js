@@ -5,7 +5,7 @@ const Cliente = require("../../models/Clientes/cliente.js")
 
 // Ruta para borrar cliente por id
 
-router.delete("/clientes/:id", async (req, res) => {
+router.delete("/cliente/:id", async (req, res) => {
     try {
         const clienteEliminado = await Cliente.findByIdAndDelete(req.params.id)
         if (!clienteEliminado) {
@@ -22,3 +22,4 @@ router.delete("/clientes/:id", async (req, res) => {
     }
 })
 
+module.exports = router;

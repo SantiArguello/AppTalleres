@@ -8,6 +8,7 @@ const serviceRoutes = require('./service');
 const agendaRoutes = require('./agenda');
 const motoFiltradoRoutes = require('./motoFiltrado');
 const motosRoutes = require('./moto');
+const facturaRoutes = require('./Factura');
 
 router.use('/', clientesRoutes);
 router.use('/', trabajoFiltradoRoutes);
@@ -16,5 +17,6 @@ router.use('/', serviceRoutes);
 router.use('/', agendaRoutes);
 router.use('/', motoFiltradoRoutes);
 router.use('/', motosRoutes);
+router.use('/', facturaRoutes);
 
 module.exports = router;
