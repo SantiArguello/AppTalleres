@@ -5,7 +5,7 @@ const Factura = require('../../models/Facturas/factura');
 
 // ruta para obtener todas las facturas
 
-router.get('/', async (req, res) => { 
+router.get('/facturas', async (req, res) => { 
     try {
          const facturas = await Factura.find();
         res.json(facturas);
