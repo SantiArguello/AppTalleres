@@ -10,6 +10,7 @@ const motoFiltradoRoutes = require("./motoFiltrado");
 const motosRoutes = require("./moto");
 const estadisticasRoutes = require("./estadistica");
 const usuarioRoutes = require("./usuario");
+const facturaRoutes = require('./Factura');
 const trabajoRoutes = require("./trabajo");
 
 router.use("/", clientesRoutes);
@@ -21,6 +22,7 @@ router.use("/", motoFiltradoRoutes);
 router.use("/", motosRoutes);
 router.use("/", estadisticasRoutes);
 router.use("/", usuarioRoutes);
+router.use('/', facturaRoutes);
 router.use("/", trabajoRoutes);
 
 module.exports = router;
