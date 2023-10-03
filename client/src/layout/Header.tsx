@@ -1,8 +1,8 @@
 import { useState } from "react";
-import LogoBenelli from "../../public/LogoBenelli";
 import { SwitcherTheme } from "../components";
-import { MdSearch, MdExpandMore, MdExpandLess } from "react-icons/md";
+import { MdSearch, MdExpandMore, MdMenu } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { SidebarMobile } from ".";
 
 const Header = () => {
 	/**
@@ -10,7 +10,8 @@ const Header = () => {
 	 * Crear estado para manejar el texto de la busqueda
 	 */
 
-	const [showMenu, setShowMenu] = useState(false);
+	const [showProfileOptions, setShowProfileOptions] = useState(false);
+	const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
@@ -22,94 +23,84 @@ const Header = () => {
 		console.log("Submit Buscar");
 	};
 
-	const handleMenu = () => {
-		console.log(showMenu);
-		setShowMenu(!showMenu);
+	const handleProfileOptions = () => {
+		console.log(showProfileOptions);
+		setShowProfileOptions(!showProfileOptions);
+	};
+	const handleMobileSidebar = () => {
+		console.log(mobileSidebarOpen);
+		setMobileSidebarOpen((prev) => (prev ? false : true));
 	};
 
 	return (
-		<header className="relative top-0 left-0 right-0 z-10">
-			<div className="flex justify-between mx-auto max-w-screen-xxl px-4 sm:px-6 xl:px-8 py-1">
-				<LogoBenelli />
-				<div className="flex items-center justify-end gap-4">
-					<div className="flex items-center gap-4">
-						<div className="relative"></div>
-						{/* Barra busqueda y boton theme */}
+		<>
+			<header className="sticky top-0 z-10 flex-shrink-0 flex h-16 shadow">
+				{/* Boton Burguer Responsive */}
+				<button className="md:hidden cursor-pointer px-3" onClick={handleMobileSidebar}>
+					<MdMenu size={"1.5rem"} />
+				</button>
+				<div className="flex-1 px-4 flex justify-between">
+					{/* Barra busqueda */}
 
-						<div className="flex items-center justify-center">
-							<form onSubmit={handleSubmit}>
-								<div className="relative">
-									<span className="absolute inset-y-0 left-0 flex items-center pl-2 bg-inherit">
-										<button type="submit" className="p-1 focus:shadow-outline active:scale-75 transform transition-transform">
-											<MdSearch />
-										</button>
-									</span>
-									<input
-										type="search"
-										name="search"
-										onChange={handleSearch}
-										className="py-2 text-sm t pl-10 outline-none dark:outline-none focus:ring-green-700 border-0 bg-inherit"
-										placeholder="Buscar..."
-									/>
-								</div>
-							</form>
-						</div>
-
-						{/* Boton theme */}
-
-						<SwitcherTheme />
+					<div className="flex-1 flex">
+						<form className="w-full flex md:ml-0" onSubmit={handleSubmit}>
+							<label htmlFor="search-field" className="sr-only">
+								Buscar
+							</label>
+							<div className="relative w-full text-neutral-400 focus-within:text-neutral-600 ">
+								<button type="submit" className="absolute inset-y-0 left-0 flex items-center active:scale-75 ">
+									<MdSearch />
+								</button>
+								<input
+									className="block w-full h-full pl-8 pr-3 py-2 border-transparent focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm bg-inherit"
+									placeholder="Buscar"
+									onChange={handleSearch}
+									type="search"
+									name="search"
+								/>
+							</div>
+						</form>
 					</div>
 
-					{/* Separador */}
+					<div className="ml-4 flex items-center md:mx-4">
+						{/* Boton theme */}
+						<div className="flex items-center">
+							<SwitcherTheme />
+						</div>
 
-					<span aria-hidden="true" className="block h-6 w-px rounded-full"></span>
+						<div className="relative flex justify-center ml-4">
+							{/* Imagen de perfil */}
+							<img
+								alt="Perfil"
+								src="https://i.pinimg.com/originals/38/e9/e7/38e9e70515469e8560d3fcd0b82641a8.jpg"
+								className="h-10 w-10 rounded-full object-cover cursor-pointer"
+								onClick={handleProfileOptions}
+							/>
+							<button
+								className="hidden md:block hover:text-green-700 transform transition-transform active:scale-75 mx-2"
+								onClick={handleProfileOptions}>
+								<MdExpandMore size={"1.5rem"} className={showProfileOptions && "rotate-180"} />
+							</button>
 
-					{/* Imagen de perfil */}
+							{/* Menu de perfil  */}
 
-					<img
-						alt="Perfil "
-						src="https://i.pinimg.com/originals/38/e9/e7/38e9e70515469e8560d3fcd0b82641a8.jpg"
-						className="h-10 w-10 rounded-full object-cover"
-					/>
-
-					{/* Boton menu */}
-
-					<div className="relative flex justify-center">
-						<button className="hover:text-green-700 transform transition-transform active:scale-75" onClick={handleMenu}>
-							<span className="sr-only">Menu</span>
-							{showMenu ? <MdExpandLess size={"1.5rem"} /> : <MdExpandMore size={"1.5rem"} />}
-						</button>
-
-						<div
-							className={`absolute end-0 z-10 mt-5 p-1 w-48 rounded-md  shadow-lg  transition ${
-								showMenu ? "opacity-100 visible translate-y-2" : "opacity-0 -translate-y-2 invisible"
-							}`}
-							role="menu">
-							<div className="p-2">
-								<NavLink
-									to="/"
-									className="block rounded-md px-4 py-2 text-sm hover:bg-green-700 hover:text-neutral-100 p-2"
-									role="menuitem">
+							<div
+								className={`origin-top-right absolute end-0 z-10 mt-12 p-2 w-48 rounded-md shadow-lg duration-100 ${
+									showProfileOptions ? "opacity-100 visible translate-y-2" : "opacity-0 -translate-y-2 invisible"
+								}`}
+								role="menu">
+								<NavLink to="/" className="block rounded-md px-4 py-2 text-sm hover:bg-green-700 hover:text-neutral-100" role="menuitem">
 									Mi Perfil
 								</NavLink>
-							</div>
-							<div className="p-2">
-								<NavLink
-									to="/"
-									className="block rounded-md px-4 py-2 text-sm hover:bg-green-700 hover:text-neutral-100 p-2"
-									role="menuitem">
+
+								<NavLink to="/" className="block rounded-md px-4 py-2 text-sm hover:bg-green-700 hover:text-neutral-100" role="menuitem">
 									Ajustes
 								</NavLink>
-							</div>
-							<div className="p-2">
-								<NavLink
-									to="/"
-									className="block rounded-md px-4 py-2 text-sm hover:bg-green-700 hover:text-neutral-100 p-2"
-									role="menuitem">
+
+								<NavLink to="/" className="block rounded-md px-4 py-2 text-sm hover:bg-green-700 hover:text-neutral-100" role="menuitem">
 									Ayuda
 								</NavLink>
-							</div>
-							<div className="p-2">
+
 								<NavLink
 									to="/"
 									className="block rounded-md px-4 py-2 text-sm hover:bg-red-700 hover:text-neutral-100 p-2 text-red-700"
@@ -118,12 +109,13 @@ const Header = () => {
 								</NavLink>
 							</div>
 						</div>
-					</div>
 
-					{/* Fin boton menu */}
+						{/* Fin boton menu */}
+					</div>
 				</div>
-			</div>
-		</header>
+			</header>
+			<SidebarMobile mobileSidebarOpen={mobileSidebarOpen} handleMobileSidebar={handleMobileSidebar} />
+		</>
 	);
 };
 

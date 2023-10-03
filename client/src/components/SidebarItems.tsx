@@ -10,7 +10,7 @@ import {
 type SidebarItem = {
 	name: string;
 	route: string;
-	icon: React.ReactNode;
+	icon: React.ComponentType<{ className?: string }>;
 };
 
 /* Elementos del Sidebar */
@@ -18,37 +18,37 @@ const SidebarItems: Array<SidebarItem> = [
 	{
 		name: "Dashboard",
 		route: "/dashboard",
-		icon: <MdOutlineDashboard size={"1.5rem"} />,
+		icon: MdOutlineDashboard,
 	},
 	{
 		name: "Trabajos",
 		route: "/trabajos",
-		icon: <FaMotorcycle size={"1.5rem"} />,
+		icon: FaMotorcycle,
 	},
 	{
 		name: "Calendario",
 		route: "/calendario",
-		icon: <MdOutlineCalendarMonth size={"1.5rem"} />,
+		icon: MdOutlineCalendarMonth,
 	},
 	{
 		name: "Clientes",
 		route: "/clientes",
-		icon: <MdOutlineSportsMotorsports size={"1.5rem"} />,
+		icon: MdOutlineSportsMotorsports,
 	},
 	{
 		name: "Facturación",
 		route: "/facturacion",
-		icon: <FaFileInvoiceDollar size={"1.5rem"} />,
+		icon: FaFileInvoiceDollar,
 	},
 	{
 		name: "Notificaciones",
 		route: "/notificaciones",
-		icon: <MdOutlineNotificationsNone size={"1.5rem"} />,
+		icon: MdOutlineNotificationsNone,
 	},
 	{
 		name: "Estadísticas",
 		route: "/estadisticas",
-		icon: <MdOutlineQueryStats size={"1.5rem"} />,
+		icon: MdOutlineQueryStats,
 	},
 ];
 
