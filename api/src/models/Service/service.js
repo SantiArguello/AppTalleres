@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const sumaPreciosService = require("../../middlewares/sumaPreciosService")
 
 const serviceSchema = new mongoose.Schema({
   fecha: {
@@ -24,13 +25,29 @@ const serviceSchema = new mongoose.Schema({
       type: Number,
     }
   }],
-  precio: {
-    type: Number,
-  },
   kilometros: {
     type: Number,
+  },
+  precioFinal: {
+    type: Number,
+  },
+  extra: {
+    type: String,
+  },
+  precioExtra: {
+    type: Number,
+  },
+  manoDeObra: {
+    type: Number,
+  },
+  precioRepuestosyExtras: {
+    type: Number,
   }
+
 });
+
+serviceSchema.pre('save', sumaPreciosService);
+
 
 const Service = mongoose.model('Service', serviceSchema);
 module.exports = Service;

@@ -23,7 +23,7 @@ const clienteSchema = new mongoose.Schema({
   moto: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Motos"
+      ref: "Moto"
     }
   ]
   

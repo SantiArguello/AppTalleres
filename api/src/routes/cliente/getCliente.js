@@ -7,7 +7,17 @@ const Cliente = require("../../models/Clientes/cliente.js");
 // Ruta para obtener todos los clientes
 router.get("/clientes", async (req, res) => {
   try {
-    const clientes = await Cliente.find();
+    const clientes = await Cliente.find()
+      .populate({
+        path: "moto",
+        select: "modelo kilometros año -_id",
+        populate: {
+          path: "modelo",
+          select:"modelo segmento -_id"
+        }
+        
+      })
+    
     res.status(200).json(clientes);
   } catch (error) {
     res
@@ -33,11 +43,13 @@ router.get("/clientes/buscar", async (req, res) => {
         ],
       }).populate({
         path: "moto",
+        select: "modelo kilometros año -_id",
         populate: {
           path: "modelo",
-          select: "modelo segmento", // Aquí seleccionamos solo los campos que queremos mostrar
-        },
-      });
+          select:"modelo segmento -_id"
+        }
+        
+      })
   
       res.status(200).json(clientesEncontrados);
     } catch (error) {
