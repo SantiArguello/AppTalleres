@@ -34,7 +34,7 @@ const Header = () => {
 
 	return (
 		<>
-			<header className="sticky top-0 z-10 flex-shrink-0 flex h-16 shadow">
+			<header className="sticky top-0 z-10 flex-shrink-0 flex h-16 shadow bg-neutral-100 dark:bg-neutral-800">
 				{/* Boton Burguer Responsive */}
 				<button className="md:hidden cursor-pointer px-3" onClick={handleMobileSidebar}>
 					<MdMenu size={"1.5rem"} />
@@ -109,11 +109,10 @@ const Header = () => {
 								</NavLink>
 							</div>
 						</div>
-
-						{/* Fin boton menu */}
 					</div>
 				</div>
 			</header>
+			{/* Sidebar Mobile  */}
 			<SidebarMobile mobileSidebarOpen={mobileSidebarOpen} handleMobileSidebar={handleMobileSidebar} />
 		</>
 	);
