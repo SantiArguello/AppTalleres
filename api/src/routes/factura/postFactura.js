@@ -14,6 +14,7 @@ router.post("/factura", async (req, res) => {
         res.status(400).json({ message: "Error al crear la factura", error: error.message });
     
     }
+
 });
  
 module.exports = router;

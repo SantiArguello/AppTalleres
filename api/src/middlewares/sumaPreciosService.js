@@ -10,7 +10,7 @@ const sumaPreciosService = async function (next) {
     for (const repuesto of this.cantidadRepuestos) {
       const repuestoDoc = await mongoose.model('RepuestoInsumo').findById(repuesto.repuesto);
       if (repuestoDoc) {
-        repuestosSum += repuestoDoc.precio * repuesto.cantidad;
+        repuestosSum += repuestoDoc.precioVenta * repuesto.cantidad;
       }
     }
   }

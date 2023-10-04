@@ -15,6 +15,12 @@ const repuestoInsumoSchema = new mongoose.Schema({
     },
     precio: {
         type: Number,
+    },
+    precioVenta: {
+        type: Number,
+    },
+    estado: {
+      type: Number  
     }
 
 })
