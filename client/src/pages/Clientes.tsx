@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { MdPhone, MdOutlineEmail, MdKeyboardArrowRight } from "react-icons/md";
+import { MdPhone, MdOutlineEmail, MdKeyboardArrowRight, MdPersonSearch } from "react-icons/md";
+import { HiUsers } from "react-icons/hi2";
 
 const clientes = [
 	{
@@ -39,7 +40,42 @@ const clientes = [
 export default function Clientes() {
 	return (
 		<>
-			<h2 className="text-xl font-bold mb-2">Clientes</h2>
+			<div className="flex items-center justify-between mb-4">
+				<h2 className="text-xl font-bold">Clientes</h2>
+
+				{/* BARRA BUSQUEDA */}
+
+				<div className="hidden lg:block">
+					<div className="mt-1 flex rounded-md shadow-sm">
+						<div className="relative flex items-stretch flex-grow focus-within:z-10">
+							<input
+								type="email"
+								name="email"
+								id="email"
+								className="focus:ring-green-500 focus:border-green-500 block w-full rounded-none rounded-l-md sm:text-sm border-neutral-300 bg-inherit dark:border-neutral-600"
+								placeholder="John Tattoo"
+							/>
+						</div>
+						<button
+							type="button"
+							className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-neutral-300 dark:border-neutral-700 text-sm font-medium rounded-r-md hover:bg-neutral-100 dark:hover:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500">
+							<MdPersonSearch size={"1.25rem"} color={"gray"} />
+						</button>
+					</div>
+				</div>
+
+				{/* Boton Crear Cliente */}
+
+				<button
+					type="button"
+					onClick={() => console.log("Crear Cliente")}
+					className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+					Crear Cliente
+				</button>
+			</div>
+
+			{/* LISTA CLIENTES */}
+
 			<div className="bg-neutral-100 dark:bg-neutral-800 shadow overflow-hidden sm:rounded-md">
 				<ul role="list" className="divide-y divide-neutral-200 dark:divide-neutral-700">
 					{clientes.map((client) => (
