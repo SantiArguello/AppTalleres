@@ -9,6 +9,11 @@ connectToDatabase();
 // Configurar middlewares
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(
+    cors({
+        origin: "http://localhost:5173",
+    })
+)
 
 // Importar y usar tus rutas centralizadas desde routes/index.js
 const routes = require("./routes");
