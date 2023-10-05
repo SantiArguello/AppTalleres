@@ -15,7 +15,7 @@ export default function Clientes() {
 				setClientes(data);
 				setLoading(false);
 			} catch (error) {
-				console.error("Error al obtener la lista de clientes:", error);
+				console.error(error);
 			}
 		};
 
@@ -105,7 +105,9 @@ export default function Clientes() {
 												</div>
 												<div className="hidden md:block">
 													<div>
-														<p className="text-sm font-medium">Moto {client.moto}</p>
+														<p className="text-sm font-medium">
+															{client.moto.length ? client.moto.map((moto) => moto.modelo.modelo) : "Sin especificar"}
+														</p>
 														<p className="mt-2 flex items-center text-sm">
 															<span className="flex-shrink-0 mr-1.5 " aria-hidden="true">
 																<MdPhone />
