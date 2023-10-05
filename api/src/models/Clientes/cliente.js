@@ -25,7 +25,11 @@ const clienteSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Moto"
     }
-  ]
+  ],
+  facturas: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Factura"
+  }]
   
 });
 
