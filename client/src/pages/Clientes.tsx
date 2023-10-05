@@ -1,12 +1,16 @@
 import { NavLink } from "react-router-dom";
 import { MdPhone, MdOutlineEmail, MdKeyboardArrowRight, MdPersonSearch } from "react-icons/md";
+import { LuLoader2 } from "react-icons/lu";
+import { IconContext } from "react-icons";
 import { Cliente } from "../utils/interfaces";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Clientes() {
 	const [clientes, setClientes] = useState<Cliente[]>([]);
+	const [searchQuery, setSearchQuery] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [loadingSearch, setLoadingSearch] = useState(false);
 
 	useEffect(() => {
 		const getClientes = async () => {
@@ -18,9 +22,28 @@ export default function Clientes() {
 				console.error(error);
 			}
 		};
-
 		getClientes();
 	}, []);
+
+	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const getClientesByName = async () => {
+			try {
+				setLoadingSearch(true);
+				const { data } = await axios.get(`http://localhost:3000/clientes/buscar?search=${searchQuery}`);
+				setClientes(data);
+				setLoadingSearch(false);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		getClientesByName();
+	};
+
+	const handleSearchQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
+		e.preventDefault();
+		setSearchQuery(e.target.value);
+	};
 
 	return (
 		<>
@@ -29,23 +52,30 @@ export default function Clientes() {
 
 				{/* BARRA BUSQUEDA */}
 
-				<div className="hidden lg:block">
-					<div className="mt-1 flex rounded-md shadow-sm">
-						<div className="relative flex items-stretch flex-grow focus-within:z-10">
+				<div className="hidden md:block">
+					<form className="mt-1 flex rounded-md shadow-sm" onSubmit={handleSearch}>
+						<div className="relative flex">
 							<input
-								type="email"
-								name="email"
-								id="email"
-								className="focus:ring-green-500 focus:border-green-500 block w-full rounded-none rounded-l-md sm:text-sm border-neutral-300 bg-inherit dark:border-neutral-600"
+								type="name"
+								name="name"
+								className="ps-3 -green-900 outline-none focus:ring-1 focus-visible:ring-green-500 focus:ring-green-500 block w-full rounded-none rounded-l-md sm:text-sm bg-inherit placeholder:text-neutral-400"
 								placeholder="John Tattoo"
+								value={searchQuery}
+								onChange={handleSearchQuery}
 							/>
 						</div>
 						<button
-							type="button"
-							className="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-r-md hover:bg-neutral-100 dark:hover:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500">
-							<MdPersonSearch size={"1.25rem"} color={"gray"} />
+							type="submit"
+							className="-ml-px inline-flex items-center space-x-2 px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-r-md hover:bg-neutral-100 dark:hover:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500">
+							{loadingSearch ? (
+								<IconContext.Provider value={{ className: "animate-spin" }}>
+									<LuLoader2 size={"1.25rem"} color={"gray"} />
+								</IconContext.Provider>
+							) : (
+								<MdPersonSearch size={"1.25rem"} />
+							)}
 						</button>
-					</div>
+					</form>
 				</div>
 
 				{/* Boton Crear Cliente */}
