@@ -1,49 +1,13 @@
-import { NavLink } from "react-router-dom";
-import { MdPhone, MdOutlineEmail, MdKeyboardArrowRight, MdPersonSearch } from "react-icons/md";
+import { NavLink, useLoaderData, Form, useNavigation } from "react-router-dom";
+import { MdPersonSearch } from "react-icons/md";
 import { LuLoader2 } from "react-icons/lu";
 import { IconContext } from "react-icons";
 import { Cliente } from "../utils/interfaces";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { ClientCard, ClientSkeleton } from "../components";
 
-export default function Clientes() {
-	const [clientes, setClientes] = useState<Cliente[]>([]);
-	const [searchQuery, setSearchQuery] = useState("");
-	const [loading, setLoading] = useState(true);
-	const [loadingSearch, setLoadingSearch] = useState(false);
-
-	useEffect(() => {
-		const getClientes = async () => {
-			try {
-				const { data } = await axios.get("http://localhost:3000/clientes");
-				setClientes(data);
-				setLoading(false);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		getClientes();
-	}, []);
-
-	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		const getClientesByName = async () => {
-			try {
-				setLoadingSearch(true);
-				const { data } = await axios.get(`http://localhost:3000/clientes/buscar?search=${searchQuery}`);
-				setClientes(data);
-				setLoadingSearch(false);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-		getClientesByName();
-	};
-
-	const handleSearchQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
-		e.preventDefault();
-		setSearchQuery(e.target.value);
-	};
+const Clientes = () => {
+	const { clientes } = useLoaderData() as { clientes: Cliente[] };
+	const navigation = useNavigation();
 
 	return (
 		<>
@@ -53,21 +17,20 @@ export default function Clientes() {
 				{/* BARRA BUSQUEDA */}
 
 				<div className="hidden md:block">
-					<form className="mt-1 flex rounded-md shadow-sm" onSubmit={handleSearch}>
+					<Form className="mt-1 flex rounded-md shadow-sm" role="search">
 						<div className="relative flex">
 							<input
-								type="name"
-								name="name"
 								className="ps-3 -green-900 outline-none focus:ring-1 focus-visible:ring-green-500 focus:ring-green-500 block w-full rounded-none rounded-l-md sm:text-sm bg-inherit placeholder:text-neutral-400"
-								placeholder="John Tattoo"
-								value={searchQuery}
-								onChange={handleSearchQuery}
+								type="search"
+								name="search"
+								aria-label="Buscar cliente"
+								placeholder="Buscar cliente"
 							/>
 						</div>
 						<button
 							type="submit"
 							className="-ml-px inline-flex items-center space-x-2 px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-r-md hover:bg-neutral-100 dark:hover:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500">
-							{loadingSearch ? (
+							{navigation.state === "loading" && navigation.location.search ? (
 								<IconContext.Provider value={{ className: "animate-spin" }}>
 									<LuLoader2 size={"1.25rem"} color={"gray"} />
 								</IconContext.Provider>
@@ -75,89 +38,55 @@ export default function Clientes() {
 								<MdPersonSearch size={"1.25rem"} />
 							)}
 						</button>
-					</form>
+					</Form>
 				</div>
 
 				{/* Boton Crear Cliente */}
 
-				<button
+				<NavLink
 					type="button"
-					onClick={() => console.log("Crear Cliente")}
+					to="/clientes/crear"
 					className="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-neutral-50 bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
 					Crear Cliente
-				</button>
+				</NavLink>
 			</div>
 
 			{/* LISTA CLIENTES */}
 
 			<div className="bg-neutral-100 dark:bg-neutral-800 shadow overflow-hidden sm:rounded-md">
 				<ul role="list" className="divide-y divide-neutral-200 dark:divide-neutral-700">
-					{loading ? (
-						<div className="flex items-center px-4 py-4 sm:px-6">
-							<div className="min-w-0 flex-1 flex items-center animate-pulse  ">
-								<div className="rounded-full bg-neutral-200 dark:bg-neutral-600 h-12 w-12"></div>
-								<div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-									<div className="space-y-6 py-1">
-										<div className="h-3 max-w-xs bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-										<div className="h-3 max-w-xs bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-									</div>
-									<div className="hidden md:block">
-										<div className="space-y-6 py-1">
-											<div className="h-3 max-w-xs bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-											<div className="h-3 max-w-xs bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div></div>
-						</div>
-					) : (
+					{navigation.state === "loading" ? (
+						<ClientSkeleton />
+					) : clientes.length ? (
 						clientes.map((client) => (
 							<li key={client.correo}>
-								<NavLink to="#" className="block hover:bg-neutral-200 dark:hover:bg-neutral-700">
-									<div className="flex items-center px-4 py-4 sm:px-6">
-										<div className="min-w-0 flex-1 flex items-center">
-											<span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
-												<svg className="h-full w-full text-neutral-300 dark:text-neutral-600" fill="currentColor" viewBox="0 0 24 24">
-													<path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-												</svg>
-											</span>
-
-											<div className="min-w-0 flex-1 px-4 md:grid md:grid-cols-2 md:gap-4">
-												<div>
-													<p className="text-sm font-semibold text-green-600 truncate">{`${client.apellido} ${client.nombre}`}</p>
-													<p className="mt-2 flex items-center text-sm ">
-														<span className="flex-shrink-0 mr-1.5" aria-hidden="true">
-															<MdOutlineEmail />
-														</span>
-														<span className="truncate">{client.correo}</span>
-													</p>
-												</div>
-												<div className="hidden md:block">
-													<div>
-														<p className="text-sm font-medium">
-															{client.moto.length ? client.moto.map((moto) => moto.modelo.modelo) : "Sin especificar"}
-														</p>
-														<p className="mt-2 flex items-center text-sm">
-															<span className="flex-shrink-0 mr-1.5 " aria-hidden="true">
-																<MdPhone />
-															</span>
-															{client.telefono || "Sin telefono"}
-														</p>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div>
-											<MdKeyboardArrowRight />
-										</div>
-									</div>
-								</NavLink>
+								<ClientCard client={client} />
 							</li>
 						))
+					) : (
+						<div className="text-center mt-4 mb-4 font-semibold text-lg">No se encontraron clientes</div>
 					)}
 				</ul>
 			</div>
 		</>
 	);
-}
+};
+
+// Obtiene los clientes de la API
+export const loaderClientes = async ({ request }) => {
+	const { search } = new URL(request.url);
+	const hasSearch = search.split("=")[1];
+
+	let response;
+
+	if (hasSearch) {
+		response = await fetch(`http://localhost:3000/clientes/buscar${search}`);
+	} else {
+		response = await fetch("http://localhost:3000/clientes");
+	}
+
+	const clientes = await response.json();
+	return { clientes };
+};
+
+export default Clientes;
