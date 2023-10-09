@@ -1,8 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "../layout";
-import { ErrorNotFound } from "../components";
+import { ErrorNotFound, FormNuevoCliente } from "../components";
 import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas, Login, Signup } from "../pages";
-import App from "../App";
+import { loaderClientes } from "../pages/Clientes";
 
 const router = createBrowserRouter([
 	{
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 			{
 				path: "/",
 				index: true,
-				element: <App />,
+				element: <Dashboard />,
 			},
 			{
 				path: "dashboard",
@@ -38,17 +38,27 @@ const router = createBrowserRouter([
 			{
 				path: "clientes",
 				element: <Clientes />,
+				loader: loaderClientes,
+				errorElement: <h1 className="text-center">No se encontro clientes</h1>,
 			},
 			{
-				path: "/facturacion",
+				path: "clientes/crear",
+				element: <FormNuevoCliente />,
+			},
+			{
+				path: "clientes/:clientId",
+				element: <h1>Cliente Details</h1>,
+			},
+			{
+				path: "facturacion",
 				element: <Facturacion />,
 			},
 			{
-				path: "/notificaciones",
+				path: "notificaciones",
 				element: <Notificaciones />,
 			},
 			{
-				path: "/estadisticas",
+				path: "estadisticas",
 				element: <Estadisticas />,
 			},
 		],
