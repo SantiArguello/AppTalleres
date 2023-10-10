@@ -24,6 +24,8 @@ const swaggerSpec = {
     apis: [
         path.join(__dirname, "./routes/cliente/doc.js"),
         path.join(__dirname, "./routes/moto/doc.js"),
+        path.join(__dirname, "./routes/agenda/doc.js"),
+        path.join(__dirname, "./routes/estadistica/doc.js")
         
         // Agrega más rutas de documentación de Swagger según sea necesario
       ],

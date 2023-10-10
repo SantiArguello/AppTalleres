@@ -107,3 +107,89 @@
  *               message: Error al obtener las motos
  *               error: Detalles del error
  */
+
+// DELETE MOTO
+
+/**
+ * @swagger
+ * /moto/{id}:
+ *   delete:
+ *     summary: Eliminar una moto por ID
+ *     description: Elimina una moto de la base de datos por su ID.
+ *     tags: [Motos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID de la moto a eliminar.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Moto eliminada con éxito.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Moto eliminada exitosamente
+ *       404:
+ *         description: Error al eliminar la moto. La moto no se encontró.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Moto no encontrada
+ *       500:
+ *         description: Error al eliminar la moto.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Error al eliminar la moto
+ *               error: Detalles del error
+ */
+
+// PUT MOTO
+
+/**
+ * @swagger
+ * /moto/{id}:
+ *   put:
+ *     summary: Actualizar una moto por ID
+ *     description: Actualiza una moto en la base de datos por su ID.
+ *     tags: [Motos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID de la moto a actualizar.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       description: Datos de la moto a actualizar.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Moto' # Asegúrate de definir el esquema de la moto
+ *     responses:
+ *       200:
+ *         description: Moto actualizada con éxito.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Moto actualizada exitosamente
+ *               data: [Moto actualizada]
+ *       404:
+ *         description: Error al actualizar la moto. La moto no se encontró.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Moto no encontrada
+ *       400:
+ *         description: Error al actualizar la moto.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Error al actualizar la moto
+ *               error: Detalles del error
+ */
+
+//
