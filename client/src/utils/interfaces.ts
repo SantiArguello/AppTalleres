@@ -16,6 +16,7 @@ export interface Moto {
 }
 
 export interface Modelo {
+	_id: string;
 	modelo: string;
 	segmento: string;
 }

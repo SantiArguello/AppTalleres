@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Clientes } from "../src/pages";
+import { Clientes } from "../..";
 import { expect, test, describe } from "vitest";
 import React from "react";
 

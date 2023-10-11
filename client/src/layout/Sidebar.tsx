@@ -13,7 +13,7 @@ const Sidebar = () => {
 
 	return (
 		<aside className={`hidden h-screen md:flex ${collapsed ? "md:w-64" : "md:w-20"} md:flex-col md:inset-y-0 duration-300`}>
-			<div className="border-r border-gray-200 pt-5 flex flex-col flex-grow px-2">
+			<div className="border-r border-neutral-200 dark:border-neutral-600 pt-5 flex flex-col flex-grow px-2">
 				{/* LOGO */}
 
 				<div className={`${collapsed && "px-5"} duration-300`}>
@@ -33,7 +33,7 @@ const Sidebar = () => {
 							<NavLink
 								to={item.route}
 								key={item.name}
-								// isActive ? "bg-green-100 text-green-700" : "text-gray-900"
+								// isActive ? "bg-green-100 text-green-700" : "text-neutral-900"
 								// ""
 								className={({ isActive }) =>
 									`rounded-md py-2 px-2 flex items-center text-sm font-medium hover:bg-green-600 hover:text-neutral-100 ${

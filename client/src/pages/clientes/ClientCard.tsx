@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { Cliente } from "../utils/interfaces";
+import { Cliente } from "../../utils/interfaces";
 import { MdKeyboardArrowRight, MdOutlineEmail, MdPhone } from "react-icons/md";
 
 const ClientCard = ({ client }: { client: Cliente }) => {

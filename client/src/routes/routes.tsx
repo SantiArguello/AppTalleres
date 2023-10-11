@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "../layout";
-import { ErrorNotFound, FormNuevoCliente } from "../components";
+import { ErrorNotFound } from "../components";
+import { FormNuevoCliente } from "../pages/clientes";
 import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas, Login, Signup } from "../pages";
-import { loaderClientes } from "../pages/Clientes";
+import { loaderClientes } from "../pages/clientes";
 
 const router = createBrowserRouter([
 	{
