@@ -25,24 +25,46 @@
  * @swagger
  * /cliente:
  *   post:
- *     summary: Crear un nuevo cliente
- *     description: Crea un nuevo cliente en la base de datos.
+ *     summary: Crear un nuevo cliente y moto relacionada
+ *     description: Crea un nuevo cliente y una moto relacionada en la base de datos.
  *     tags: [Clientes]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Cliente'
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *                 description: Nombre del cliente.
+ *               apellido:
+ *                 type: string
+ *                 description: Apellido del cliente.
+ *               telefono:
+ *                 type: number
+ *                 description: Número de teléfono del cliente.
+ *               correo:
+ *                 type: string
+ *                 description: Correo del cliente.
+ *               moto:
+ *                 type: object
+ *                 properties:
+ *                   modelo:
+ *                     type: string
+ *                     description: Modelo de la moto.
+ *                   kilometros:
+ *                     type: number
+ *                     description: Kilómetros de la moto.
  *     responses:
  *       201:
- *         description: Cliente creado con éxito.
+ *         description: Cliente y moto creados con éxito.
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Cliente'
  *       400:
- *         description: Error al crear el cliente.
+ *         description: Error al crear el cliente y la moto.
  *         content:
  *           application/json:
  *             example:
@@ -105,6 +127,36 @@
  *           application/json:
  *             example:
  *               message: Error en la búsqueda
+ *               error: Detalles del error
+ */
+
+/**
+ * @swagger
+ * /cliente/{id}:
+ *   get:
+ *     summary: Obtener un cliente por ID
+ *     description: Obtiene un cliente por su ID y retorna los detalles del cliente.
+ *     tags: [Clientes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del cliente a buscar.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Cliente encontrado con éxito.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Cliente'
+ *       500:
+ *         description: Error al obtener el cliente.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Error al obtener el cliente
  *               error: Detalles del error
  */
 
