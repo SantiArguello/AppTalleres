@@ -3,7 +3,7 @@ const router = express.Router();
 const Service = require("../../models/Service/service");
 const Moto = require("../../models/Motos/moto");
 const RepuestoInsumo = require("../../models/RepuestosInsumos/repuestoInsumo");
-
+const Agenda = require("../../models/Agenda/agenda");
 
 // Ruta para crear un nuevo servicio
 
@@ -22,7 +22,6 @@ router.post("/service", async (req, res) => {
     moto.historial.push(nuevoServicio._id);
     await moto.save();
 
-    
     // Actualizar el stock de repuestos/insumos
     for (const repuesto of nuevoServicio.cantidadRepuestos) {
       const repuestoEnDB = await RepuestoInsumo.findById(repuesto.repuesto);
@@ -32,6 +31,13 @@ router.post("/service", async (req, res) => {
       }
     }
 
+    // Relacion con Agenda
+    const agenda = await Agenda.findByIdAndUpdate(
+      req.body.agenda,
+      { estado: false },
+      { new: true }
+    );
+    await agenda.save();
 
     res.status(201).json(nuevoServicio);
   } catch (error) {

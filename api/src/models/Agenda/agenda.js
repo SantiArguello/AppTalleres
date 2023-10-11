@@ -7,7 +7,7 @@ const agendaSchema = new mongoose.Schema({
   },
   nombre: {
     type: mongoose.Schema.Types.Mixed,
-    ref: "Cliente"
+    ref: "Cliente",
   },
   motoFiltrado: {
     type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +16,10 @@ const agendaSchema = new mongoose.Schema({
   trabajo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "TrabajoFiltrado",
+  },
+  estado: {
+    type: Boolean,
+    default: true,
   },
 });
 
