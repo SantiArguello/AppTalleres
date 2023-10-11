@@ -25,24 +25,46 @@
  * @swagger
  * /cliente:
  *   post:
- *     summary: Crear un nuevo cliente
- *     description: Crea un nuevo cliente y su moto en la base de datos.
+ *     summary: Crear un nuevo cliente y moto relacionada
+ *     description: Crea un nuevo cliente y una moto relacionada en la base de datos.
  *     tags: [Clientes]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Cliente'
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *                 description: Nombre del cliente.
+ *               apellido:
+ *                 type: string
+ *                 description: Apellido del cliente.
+ *               telefono:
+ *                 type: number
+ *                 description: Número de teléfono del cliente.
+ *               correo:
+ *                 type: string
+ *                 description: Correo del cliente.
+ *               moto:
+ *                 type: object
+ *                 properties:
+ *                   modelo:
+ *                     type: string
+ *                     description: Modelo de la moto.
+ *                   kilometros:
+ *                     type: number
+ *                     description: Kilómetros de la moto.
  *     responses:
  *       201:
- *         description: Cliente creado con éxito.
+ *         description: Cliente y moto creados con éxito.
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/Cliente'
  *       400:
- *         description: Error al crear el cliente.
+ *         description: Error al crear el cliente y la moto.
  *         content:
  *           application/json:
  *             example:
