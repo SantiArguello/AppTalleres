@@ -1,15 +1,15 @@
 export interface Cliente {
-	_id: string;
+	_id?: string;
 	apellido: string;
-	correo: string;
-	facturas?: string[];
-	fechaRegistro: Date;
+	correo?: string;
+	facturas: string[];
 	moto: Moto[];
 	nombre: string;
 	telefono: number | null;
 }
 
 export interface Moto {
+	_id: string;
 	año: number;
 	kilometros: number;
 	modelo: Modelo;
