@@ -1,35 +1,41 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Modelo } from "../../utils/interfaces";
+import { Form, useActionData, useNavigate } from "react-router-dom";
+import { ErrorFormNuevoCliente, Modelo } from "../../utils/interfaces";
 
 const FormNuevoCliente = () => {
+	// State para guardar los modelos de motos a elegir
 	const [modeloMotos, setModeloMotos] = useState([] as Modelo[]);
 
+	// Comprobacion de erorres de inputs
+	const errorMessages = useActionData() as ErrorFormNuevoCliente;
+
+	// Para redirigir
 	const navigate = useNavigate();
 
+	// Get MotoFiltrado para guardar los modelos y ordenarlos alfabeticamente
 	useEffect(() => {
-		axios
-			.get("http://localhost:3000/motoFiltrado")
-			.then(({ data }: { data: Modelo[] }) => setModeloMotos(data.sort((a, b) => a.modelo.localeCompare(b.modelo))));
+		fetch("http://localhost:3000/motoFiltrado")
+			.then((response) => response.json())
+			.then((res) => {
+				const motosOrdenadas: Modelo[] = res.sort((a: Modelo, b: Modelo) => a.modelo.localeCompare(b.modelo));
+				setModeloMotos(motosOrdenadas);
+			});
 	}, []);
 
 	return (
-		<form className="space-y-8 lg:mx-5 divide-y divide-neutral-200 dark:divide-neutral-600">
+		<Form method="post" className="space-y-8 lg:mx-5 divide-y divide-neutral-200 dark:divide-neutral-600">
 			<div>
 				<div className="pt-2">
 					<div>
 						<h2 className="text-xl font-bold">Crear nuevo cliente</h2>
 					</div>
 
-					{/* Foto Perfil */}
-
 					<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 						<div className="sm:col-span-6">
 							<h3 className="text-xl">Datos del cliente</h3>
 						</div>
 						<div className="sm:col-span-6">
-							<label htmlFor="photo" className="block text-sm font-medium">
+							<label htmlFor="photo" className="block text-sm font-medium" id="photo">
 								Foto Perfil
 							</label>
 							<div className="mt-1 flex items-center pt-2">
@@ -57,16 +63,13 @@ const FormNuevoCliente = () => {
 									type="text"
 									name="nombre"
 									id="nombre"
-									// className="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
 									className=" w-full dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
 									placeholder="Juan"
 									aria-invalid="true"
 									aria-describedby="nombre-error"
 								/>
 							</div>
-							{/* <p className="mt-2 text-sm text-red-600" id="nombre-error">
-								Debe contener el nombre del cliente.
-							</p> */}
+							{errorMessages?.errorNombre && <p className="mt-2 text-sm text-red-600">{errorMessages.errorNombre}</p>}
 						</div>
 
 						<div className="sm:col-span-3">
@@ -78,42 +81,32 @@ const FormNuevoCliente = () => {
 									type="text"
 									name="apellido"
 									id="apellido"
-									// className="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
 									className=" w-full dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
 									placeholder="Perez"
 									aria-invalid="true"
 									aria-describedby="apellido-error"
 								/>
 							</div>
-							{/* <p className="mt-2 text-sm text-red-600" id="apellido-error">
-								Debe contener el apellido del cliente.
-							</p> */}
+							{errorMessages?.errorApellido && <p className="mt-2 text-sm text-red-600">{errorMessages.errorApellido}</p>}
 						</div>
 
 						<div className="sm:col-span-3">
 							<div className="flex justify-between">
-								<label htmlFor="email" className="block text-sm font-medium">
+								<label htmlFor="correo" className="block text-sm font-medium">
 									Email
 								</label>
-								<span className="text-sm text-gray-500" id="email-optional">
-									Opcional
-								</span>
 							</div>
 							<div className="mt-1 relative rounded-md shadow-sm">
 								<input
 									type="email"
-									name="email"
-									id="email"
-									// className="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
+									name="correo"
+									id="correo"
 									className=" w-full dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
 									placeholder="juan-perez@email.com"
 									aria-invalid="true"
-									aria-describedby="email-error"
 								/>
 							</div>
-							{/* <p className="mt-2 text-sm text-red-600" id="email-error">
-								Debe ser un email válido.
-							</p> */}
+							{errorMessages?.errorCorreo && <p className="mt-2 text-sm text-red-600">{errorMessages.errorCorreo}</p>}
 						</div>
 
 						<div className="sm:col-span-3">
@@ -122,24 +115,21 @@ const FormNuevoCliente = () => {
 							</label>
 							<div className="mt-1 relative rounded-md shadow-sm">
 								<input
-									type="text"
+									type="number"
 									name="telefono"
 									id="telefono"
-									// className="block w-full pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm rounded-md"
-									className=" w-full dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
+									required
+									className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none w-full dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
 									placeholder="351 123 4567"
 									aria-invalid="true"
 									aria-describedby="telefono-error"
 								/>
 							</div>
-							{/* <p className="mt-2 text-sm text-red-600" id="telefono-error">
-								Debe ser un teléfono válido.
-							</p> */}
+							{errorMessages?.errorTelefono && <p className="mt-2 text-sm text-red-600">{errorMessages.errorTelefono}</p>}
 						</div>
 					</div>
 				</div>
 			</div>
-
 			<div className="pt-3">
 				<div>
 					<h3 className="text-xl">Datos de la moto</h3>
@@ -174,10 +164,12 @@ const FormNuevoCliente = () => {
 								id="kilometros"
 								placeholder="5000"
 								min="0"
+								required
 								autoComplete="kilometros"
 								className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
 							/>
 						</div>
+						{errorMessages?.errorKilometros && <p className="mt-2 text-sm text-red-600">{errorMessages.errorKilometros}</p>}
 					</div>
 
 					<div className="sm:col-span-2">
@@ -193,14 +185,13 @@ const FormNuevoCliente = () => {
 								min="1960"
 								max={new Date().getFullYear()}
 								required
-								autoComplete="año"
 								className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none dark:bg-neutral-800 shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-neutral-300 dark:border-neutral-500 rounded-md"
 							/>
 						</div>
+						{errorMessages?.errorAño && <p className="mt-2 text-sm text-red-600">{errorMessages.errorAño}</p>}
 					</div>
 				</div>
 			</div>
-
 			<div className="pt-5">
 				<div className="flex justify-end">
 					<button
@@ -216,7 +207,7 @@ const FormNuevoCliente = () => {
 					</button>
 				</div>
 			</div>
-		</form>
+		</Form>
 	);
 };
 

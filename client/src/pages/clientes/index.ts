@@ -4,4 +4,4 @@ export { default as ClientSearchBar } from "./ClientSearchBar";
 export { default as ClientSkeleton } from "./ClientSkeleton";
 export { default as Clientes } from "./Clientes";
 export { default as FormNuevoCliente } from "./FormNuevoCliente";
-export { default as loaderClientes } from "./loaderClientes";
+export * from "./loaderClientes";

@@ -20,3 +20,13 @@ export interface Modelo {
 	modelo: string;
 	segmento: string;
 }
+
+export interface ErrorFormNuevoCliente {
+	errorNombre?: string;
+	errorApellido?: string;
+	errorTelefono?: string;
+	errorCorreo?: string;
+	errorAño?: number;
+	errorKilometros?: number;
+	errorModelo?: string;
+}
