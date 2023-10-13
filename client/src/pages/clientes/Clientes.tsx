@@ -3,6 +3,7 @@ import { Cliente } from "../../utils/interfaces";
 import { ClientSearchBar, ClientList } from "./";
 
 const Clientes = () => {
+	// Obtengo los clientes desde el loader
 	const { clientes } = useLoaderData() as { clientes: Cliente[] };
 
 	return (
