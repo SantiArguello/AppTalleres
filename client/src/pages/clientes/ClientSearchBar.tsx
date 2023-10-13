@@ -6,6 +6,8 @@ import { Form, useNavigation } from "react-router-dom";
 const ClientSearchBar = () => {
 	const navigation = useNavigation();
 
+	const isSearching = navigation.state === "loading" && navigation.location.search;
+
 	return (
 		<div className="hidden md:block">
 			<Form className="mt-1 flex rounded-md shadow-sm" role="search">
@@ -21,12 +23,12 @@ const ClientSearchBar = () => {
 				<button
 					type="submit"
 					className="-ml-px inline-flex items-center space-x-2 px-4 py-2 border border-neutral-300 dark:border-neutral-600 text-sm font-medium rounded-r-md hover:bg-neutral-100 dark:hover:bg-neutral-600 focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-green-500">
-					{navigation.state === "loading" && navigation.location.search ? (
+					{isSearching ? (
 						<IconContext.Provider value={{ className: "animate-spin" }}>
-							<LuLoader2 size={"1.25rem"} color={"gray"} />
+							<LuLoader2 size={20} color={"gray"} />
 						</IconContext.Provider>
 					) : (
-						<MdPersonSearch size={"1.25rem"} />
+						<MdPersonSearch size={20} />
 					)}
 				</button>
 			</Form>

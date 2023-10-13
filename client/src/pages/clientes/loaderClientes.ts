@@ -1,9 +1,9 @@
-import { json, redirect } from "react-router-dom";
+import { json, redirect, LoaderFunction } from "react-router-dom";
 import { Cliente } from "../../utils/interfaces";
 import { hadlerErrorNuevoCliente } from "../../utils/handlerErrorNuevoCliente";
 
 // Funcion para traer los clientes
-export const getClientes = async ({ request }: { request: Request }) => {
+export const getClientes: LoaderFunction = async ({ request }) => {
 	// Obtengo el params search para hacer la busqueda del cliente
 	// Ejemplo: http://localhost:3000/clientes?search=juan
 	const { search } = new URL(request.url);
@@ -28,7 +28,7 @@ export const getClientes = async ({ request }: { request: Request }) => {
 };
 
 // Funcion para crear un nuevo cliente
-export const postNuevoCliente = async ({ request }: { request: Request }) => {
+export const postNuevoCliente: LoaderFunction = async ({ request }) => {
 	// Esta funcion me permite traer la info de los inputs del formulario
 	const data = await request.formData();
 
@@ -71,4 +71,51 @@ export const postNuevoCliente = async ({ request }: { request: Request }) => {
 
 	// Si no hay errores, redirecciono a la pagina de clientes
 	return redirect("/clientes");
+};
+
+// Funcion para traer los clientes
+export const getDetalleCliente: LoaderFunction = async ({ params }) => {
+	// Obtengo el id del cliente
+	const { id } = params;
+
+	// Si no hay id, redirecciono a la pagina de clientes
+	if (!id) redirect("/clientes");
+
+	// Get detalle del cliente
+	const response = await fetch(`http://localhost:3000/cliente/${id}`);
+	const cliente = await response.json();
+
+	return { cliente } as { cliente: Cliente };
+};
+
+export const actionDetalleCliente: LoaderFunction = async ({ request, params }) => {
+	switch (request.method) {
+		case "PUT": {
+			// let formData = await request.formData();
+			// let name = formData.get("projectName");
+			// return actualizarCliente(name);
+			console.log("Editar Cliente");
+			return true;
+		}
+		case "DELETE": {
+			if (window.confirm("Desea eliminar el cliente?")) {
+				const deletedUser = await fetchDeleteUser(params.id);
+				window.alert(deletedUser.message);
+				return redirect(`/clientes/`);
+			} else {
+				return redirect(`/clientes/detalle/${params.id}`);
+			}
+			break;
+		}
+		default: {
+			return false;
+		}
+	}
+};
+
+const fetchDeleteUser = async (id?: string) => {
+	const response = await fetch(`http://localhost:3000/cliente/${id}`, {
+		method: "DELETE",
+	});
+	return await response.json();
 };

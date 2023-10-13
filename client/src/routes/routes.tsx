@@ -3,7 +3,14 @@ import { Layout } from "../layout";
 import { ErrorNotFound, ErrorHandler } from "../components";
 import NuevoService from "../pages/trabajos/NuevoService";
 import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas, Login, Signup } from "../pages";
-import { getClientes, postNuevoCliente, FormNuevoCliente } from "../pages/clientes";
+import {
+	postNuevoCliente,
+	FormNuevoCliente,
+	ClienteDetalle,
+	getClientes,
+	getDetalleCliente,
+	actionDetalleCliente,
+} from "../pages/clientes";
 
 const router = createBrowserRouter([
 	{
@@ -50,8 +57,10 @@ const router = createBrowserRouter([
 						action: postNuevoCliente,
 					},
 					{
-						path: "clientes/detalle/:clientId",
-						element: <h1>Cliente Details</h1>,
+						path: "clientes/detalle/:id",
+						element: <ClienteDetalle />,
+						loader: getDetalleCliente,
+						action: actionDetalleCliente,
 					},
 					{
 						path: "facturacion",

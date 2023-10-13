@@ -85,7 +85,7 @@ const Header = () => {
 							{/* Menu de perfil  */}
 
 							<div
-								className={`origin-top-right absolute end-0 z-10 mt-12 p-2 w-48 rounded-md shadow-lg duration-100 ${
+								className={`dark:bg-neutral-800 bg-neutral-100 origin-top-right absolute end-0 z-10 mt-12 p-2 w-48 rounded-md shadow-lg duration-100 ${
 									showProfileOptions ? "opacity-100 visible translate-y-2" : "opacity-0 -translate-y-2 invisible"
 								}`}
 								role="menu">
