@@ -10,7 +10,7 @@ const ClientSearchBar = () => {
 
 	return (
 		<div className="hidden md:block">
-			<Form className="mt-1 flex rounded-md shadow-sm" role="search">
+			<Form className="mt-1 flex rounded-md shadow-sm">
 				<div className="relative flex">
 					<input
 						className="ps-3 green-900 outline-none focus:ring-1 focus-visible:ring-green-500 focus:ring-green-500 focus:border-green-500 block w-full rounded-none rounded-l-md sm:text-sm bg-inherit placeholder:text-neutral-500"

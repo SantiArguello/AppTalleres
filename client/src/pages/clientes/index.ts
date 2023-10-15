@@ -5,4 +5,4 @@ export { default as ClientSkeleton } from "./ClientSkeleton";
 export { default as ClienteDetalle } from "./ClienteDetalle";
 export { default as Clientes } from "./Clientes";
 export { default as FormNuevoCliente } from "./FormNuevoCliente";
-export * from "./loaderClientes";
+export * from "../../services/loaderClientes";

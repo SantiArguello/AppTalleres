@@ -1,4 +1,4 @@
-import { Breadcrumbs } from "../components";
+import { Breadcrumbs, Loading } from "../components";
 import { Header, Sidebar } from ".";
 import { Outlet, useNavigation } from "react-router-dom";
 
@@ -14,13 +14,7 @@ const Layout = () => {
 					<Breadcrumbs />
 					<Outlet />
 				</main>
-				{navigation.state === "loading" && (
-					<div className="mt-4 flex items-center justify-center space-x-2">
-						<div className="w-3 h-3 rounded-full animate-pulse bg-green-400"></div>
-						<div className="w-3 h-3 rounded-full animate-pulse bg-green-500"></div>
-						<div className="w-3 h-3 rounded-full animate-pulse bg-green-600"></div>
-					</div>
-				)}
+				{navigation.state === "loading" && <Loading />}
 			</div>
 		</div>
 	);

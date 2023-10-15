@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 const Breadcrumbs = () => {
 	const { pathname } = useLocation();
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	let currentLink = "";
 
 	const crumbs = pathname

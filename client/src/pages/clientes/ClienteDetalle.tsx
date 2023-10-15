@@ -2,8 +2,6 @@ import { Form, useLoaderData } from "react-router-dom";
 import { Cliente } from "../../utils/interfaces";
 import { TbUserEdit, TbUserMinus } from "react-icons/tb";
 import { MdWhatsapp, MdOutlineEmail } from "react-icons/md";
-import { useState } from "react";
-import { ModalConfirm } from "../../components";
 
 const statusStyles = {
 	finalizado: "bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100",
@@ -76,12 +74,12 @@ const ClienteDetalle = () => {
 			</div>
 
 			<div className="px-4 py-5">
-				<div className=" flex flex-col lg:flex-row lg:justify-between items-center lg:items-start space-y-6 lg:space-y-0">
-					<h3 className="text-3xl leading-6 font-bold">
+				<div className=" flex flex-col lg:flex-row text-center lg:text-start lg:justify-between items-center lg:items-start space-y-6 lg:space-y-0">
+					<h3 className="text-3xl font-bold lg:w-48">
 						{cliente.nombre} {cliente.apellido}
 					</h3>
 					<div className="flex flex-col text-center space-y-2">
-						<h3 className="text-2xl leading-6 font-medium">Benelli {cliente.moto.map((moto) => moto.modelo.modelo)}</h3>
+						<h3 className="text-2xl font-medium">Benelli {cliente.moto.map((moto) => moto.modelo.modelo)}</h3>
 						<p className="text-xl font-normal">Modelo {cliente.moto.map((moto) => moto.año)}</p>
 						<p className="text-lg font-thin">Kilometraje {cliente.moto.map((moto) => moto.kilometros)}</p>
 					</div>

@@ -16,7 +16,7 @@ export const hadlerErrorNuevoCliente = (nuevoCliente: nuevoCliente) => {
 	if (!nuevoCliente.telefono) return { errorTelefono: "Telefono requerido" };
 	if (!nuevoCliente.correo?.length) return { errorCorreo: "Correo requerido" };
 	if (!nuevoCliente.moto?.modelo?.length) return { errorModelo: "Modelo requerido" };
-	if (!nuevoCliente.moto?.kilometros?.length) return { error: "Kilometros requerido" };
-	if (!nuevoCliente.moto?.año?.length) return { error: "Año requerido" };
+	if (!nuevoCliente.moto?.kilometros) return { error: "Kilometros requerido" };
+	if (!nuevoCliente.moto?.año) return { error: "Año requerido" };
 	return false;
 };
