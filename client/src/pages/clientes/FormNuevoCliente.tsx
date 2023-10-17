@@ -30,27 +30,8 @@ const FormNuevoCliente = () => {
 						<h2 className="text-xl font-bold">Crear nuevo cliente</h2>
 					</div>
 
-					<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-						<div className="sm:col-span-6">
-							<h3 className="text-xl">Datos del cliente</h3>
-						</div>
-						<div className="sm:col-span-6">
-							<label htmlFor="photo" className="block text-sm font-medium" id="photo">
-								Foto Perfil
-							</label>
-							<div className="mt-1 flex items-center pt-2">
-								<span className="h-12 w-12 rounded-full overflow-hidden bg-neutral-100 dark:bg-neutral-700">
-									<svg className="h-full w-full text-neutral-300" fill="currentColor" viewBox="0 0 24 24">
-										<path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-									</svg>
-								</span>
-								<button
-									type="button"
-									className="ml-5 bg-green-700 py-2 px-3 rounded-md shadow-sm text-sm leading-4 font-medium text-neutral-100 hover:bg-green-800 outline-none border-none focus:ring-2 focus:ring-green-500">
-									Elegir
-								</button>
-							</div>
-						</div>
+					<div className="sm:col-span-6 mt-6 ">
+						<h3 className="text-xl">Datos del cliente</h3>
 					</div>
 
 					<div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

@@ -1,7 +1,7 @@
 import { redirect, LoaderFunction } from "react-router-dom";
 import { Cliente } from "../utils/interfaces";
 import { hadlerErrorNuevoCliente } from "../utils/handlerErrorNuevoCliente";
-import { fetchDelete, fetchGet, fetchPost } from "./fetchData";
+import { fetchDelete, fetchGet, fetchPost, fetchPut } from "./fetchData";
 
 // Función para traer los clientes
 export const getClientes: LoaderFunction = async ({ request }) => {
@@ -55,9 +55,23 @@ export const getDetalleCliente: LoaderFunction = async ({ params }) => {
 export const actionDetalleCliente: LoaderFunction = async ({ request, params }) => {
 	switch (request.method) {
 		case "PUT":
-			console.log("Editar Cliente");
-			return true;
-
+			// eslint-disable-next-line no-case-declarations
+			const formData = await request.formData();
+			// eslint-disable-next-line no-case-declarations
+			const clienteEditado = {
+				nombre: formData.get("nombre"),
+				apellido: formData.get("apellido"),
+				correo: formData.get("correo"),
+				telefono: formData.get("telefono"),
+				// moto: {
+				// 	modelo: formData.get("moto"),
+				// 	kilometros: formData.get("kilometros"),
+				// 	año: formData.get("año"),
+				// },
+			};
+			fetchPut(`cliente/${params.id}`, clienteEditado);
+			window.alert("Cliente editado correctamente");
+			return redirect("/clientes/");
 		case "DELETE":
 			if (window.confirm("¿Desea eliminar el cliente?")) {
 				const clienteEliminado = await fetchDelete(`cliente/${params.id}`);

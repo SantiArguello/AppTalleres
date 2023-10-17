@@ -2,6 +2,8 @@ import { Form, useLoaderData, useNavigate } from "react-router-dom";
 import { Cliente } from "../../utils/interfaces";
 import { TbUserEdit, TbUserMinus } from "react-icons/tb";
 import { MdWhatsapp, MdOutlineEmail, MdArrowBack } from "react-icons/md";
+import { useState } from "react";
+import ModalUpdateCliente from "./ModalUpdateCliente";
 
 const statusStyles = {
 	finalizado: "bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100",
@@ -30,22 +32,9 @@ const trabajos = [
 
 const ClienteDetalle = () => {
 	const { cliente } = useLoaderData() as { cliente: Cliente };
+	const [showUpdateModal, setShowUpdateModal] = useState(false);
 
 	const navigate = useNavigate();
-	// const [showModal, setShowModal] = useState(false);
-	// const [confirmDelete, setConfirmDelete] = useState(false);
-
-	// console.log(confirmDelete);
-
-	// const onDeleteSubmit = () => {
-	// 	setShowModal(true);
-	// 	if (confirmDelete) {
-	// 		// event.preventDefault();
-	// 		window.alert("Usuario eliminado");
-	// 		return;
-	// 	}
-	// 	// break;
-	// };
 
 	return (
 		<>
@@ -66,15 +55,15 @@ const ClienteDetalle = () => {
 							<span className="hidden lg:block ml-2">Eliminar usuario</span>
 						</button>
 					</Form>
-					<Form>
-						<button
-							type="button"
-							title="Editar usuario"
-							className="flex items-center py-2 px-3 rounded-md shadow text-sm leading-4 font-medium  hover:bg-green-600 hover:text-neutral-100  dark:hover:bg-green-700 outline-none border-none focus:ring-2 focus:ring-green-000">
-							<TbUserEdit size={20} />
-							<span className="hidden lg:block ml-2">Editar usuario</span>
-						</button>
-					</Form>
+
+					<button
+						type="button"
+						title="Editar usuario"
+						onClick={() => setShowUpdateModal(true)}
+						className="flex items-center py-2 px-3 rounded-md shadow text-sm leading-4 font-medium  hover:bg-green-600 hover:text-neutral-100  dark:hover:bg-green-700 outline-none border-none focus:ring-2 focus:ring-green-000">
+						<TbUserEdit size={20} />
+						<span className="hidden lg:block ml-2">Editar usuario</span>
+					</button>
 				</div>
 			</div>
 
@@ -193,7 +182,9 @@ const ClienteDetalle = () => {
 				</div>
 			</main>
 
-			{/* {showModal && <ModalConfirm showModal={showModal} setShowModal={setShowModal} setConfirmDelete={setConfirmDelete} />} */}
+			{showUpdateModal && (
+				<ModalUpdateCliente setShowUpdateModal={setShowUpdateModal} cliente={cliente} showUpdateModal={showUpdateModal} />
+			)}
 		</>
 	);
 };
