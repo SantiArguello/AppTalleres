@@ -1,25 +1,27 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import moto1 from '../assets/moto1.png'
-import moto2 from '../assets/moto2.png'
+import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moto1 from "../../assets/moto1.png";
+import moto2 from "../../assets/moto2.png";
 
-
-const listaMotos = [{
-	id: 1,
-    modelo: 'zanelita',
-    imagen: moto1,
-}, {
-	id: 2,
-	modelo: 'Pumita',
-	imagen: moto2,
-},];
+const listaMotos = [
+	{
+		id: 1,
+		modelo: "zanelita",
+		imagen: moto1,
+	},
+	{
+		id: 2,
+		modelo: "Pumita",
+		imagen: moto2,
+	},
+];
 
 const Calendario = () => {
 	// Estados para almacenar los datos del formulario
-	const [nombre, setNombre] = useState('');
-	const [moto, setMoto] = useState('');
-	const [descripcion, setDescripcion] = useState('');
+	const [nombre, setNombre] = useState("");
+	const [moto, setMoto] = useState("");
+	const [descripcion, setDescripcion] = useState("");
 	const [fecha, setFecha] = useState(null);
 	const [motoSeleccionada, setMotoSeleccionada] = useState(null);
 
@@ -37,15 +39,15 @@ const Calendario = () => {
 		console.log(data);
 
 		// Limpia los campos después de enviar
-		setNombre('');
-		setMoto('');
-		setDescripcion('');
+		setNombre("");
+		setMoto("");
+		setDescripcion("");
 	};
 
 	//controlador de eventos para el cambio en el select de motos:
 	const handleSelectMoto = (e) => {
 		const motoId = parseInt(e.target.value, 10);
-		const moto = listaMotos.find(moto => moto.id === motoId);
+		const moto = listaMotos.find((moto) => moto.id === motoId);
 		setMotoSeleccionada(moto);
 	};
 
@@ -67,14 +69,12 @@ const Calendario = () => {
 
 				<div className="mb-4">
 					<label className="block text-gray-700 text-sm font-bold mb-2">Moto</label>
-					<select
-						value={listaMotos ? listaMotos.id : ''}
-						onChange={handleSelectMoto}
-						className="border rounded w-full py-2 px-3"
-					>
+					<select value={listaMotos ? listaMotos.id : ""} onChange={handleSelectMoto} className="border rounded w-full py-2 px-3">
 						<option value="">Selecciona una moto</option>
-						{listaMotos.map(moto => (
-							<option key={moto.id} value={moto.id}>{moto.modelo}</option>
+						{listaMotos.map((moto) => (
+							<option key={moto.id} value={moto.id}>
+								{moto.modelo}
+							</option>
 						))}
 					</select>
 				</div>
@@ -85,8 +85,7 @@ const Calendario = () => {
 						value={descripcion}
 						onChange={(e) => setDescripcion(e.target.value)}
 						className="border rounded w-full py-2 px-3 h-32"
-						placeholder="Descripción"
-					></textarea>
+						placeholder="Descripción"></textarea>
 				</div>
 
 				<div className="mb-4">
@@ -100,10 +99,7 @@ const Calendario = () => {
 					/>
 				</div>
 
-				<button
-					type="submit"
-					className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-				>
+				<button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">
 					Guardar Turno
 				</button>
 				{motoSeleccionada && (

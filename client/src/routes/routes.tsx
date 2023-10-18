@@ -1,8 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Layout } from "../layout";
-import { ErrorNotFound, FormNuevoCliente } from "../components";
+import { ErrorNotFound, ErrorHandler } from "../components";
+import NuevoService from "../pages/trabajos/NuevoService";
 import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas, Login, Signup } from "../pages";
-import { loaderClientes } from "../pages/Clientes";
+import {
+	postNuevoCliente,
+	FormNuevoCliente,
+	ClienteDetalle,
+	getClientes,
+	getDetalleCliente,
+	actionDetalleCliente,
+} from "../pages/clientes";
 
 const router = createBrowserRouter([
 	{
@@ -19,47 +27,58 @@ const router = createBrowserRouter([
 		errorElement: <ErrorNotFound />,
 		children: [
 			{
-				path: "/",
-				index: true,
-				element: <Dashboard />,
-			},
-			{
-				path: "dashboard",
-				element: <Dashboard />,
-			},
-			{
-				path: "trabajos",
-				element: <Trabajos />,
-			},
-			{
-				path: "calendario",
-				element: <Calendario />,
-			},
-			{
-				path: "clientes",
-				element: <Clientes />,
-				loader: loaderClientes,
-				errorElement: <h1 className="text-center">No se encontro clientes</h1>,
-			},
-			{
-				path: "clientes/crear",
-				element: <FormNuevoCliente />,
-			},
-			{
-				path: "clientes/:clientId",
-				element: <h1>Cliente Details</h1>,
-			},
-			{
-				path: "facturacion",
-				element: <Facturacion />,
-			},
-			{
-				path: "notificaciones",
-				element: <Notificaciones />,
-			},
-			{
-				path: "estadisticas",
-				element: <Estadisticas />,
+				errorElement: <ErrorHandler />,
+				children: [
+					{
+						path: "/",
+						index: true,
+						element: <Dashboard />,
+					},
+					{
+						path: "dashboard",
+						element: <Dashboard />,
+					},
+					{
+						path: "trabajos",
+						element: <Trabajos />,
+					},
+					{
+						path: "calendario",
+						element: <Calendario />,
+					},
+					{
+						path: "clientes",
+						element: <Clientes />,
+						loader: getClientes,
+					},
+					{
+						path: "clientes/crear",
+						element: <FormNuevoCliente />,
+						action: postNuevoCliente,
+					},
+					{
+						path: "clientes/detalle/:id",
+						element: <ClienteDetalle />,
+						loader: getDetalleCliente,
+						action: actionDetalleCliente,
+					},
+					{
+						path: "facturacion",
+						element: <Facturacion />,
+					},
+					{
+						path: "notificaciones",
+						element: <Notificaciones />,
+					},
+					{
+						path: "estadisticas",
+						element: <Estadisticas />,
+					},
+					{
+						path: "/nuevo-service",
+						element: <NuevoService />,
+					},
+				],
 			},
 		],
 	},

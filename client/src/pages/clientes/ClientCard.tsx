@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { Cliente } from "../utils/interfaces";
+import { Cliente } from "../../utils/interfaces";
 import { MdKeyboardArrowRight, MdOutlineEmail, MdPhone } from "react-icons/md";
 
 const ClientCard = ({ client }: { client: Cliente }) => {
 	return (
-		<NavLink to={`/clientes/${client._id}`} className="block hover:bg-neutral-200 dark:hover:bg-neutral-700">
+		<NavLink to={`/clientes/detalle/${client._id}`} className="block hover:bg-neutral-200 dark:hover:bg-neutral-700">
 			<div className="flex items-center px-4 py-4 sm:px-6">
 				<div className="min-w-0 flex-1 flex items-center">
 					<span className="inline-block h-12 w-12 rounded-full overflow-hidden bg-neutral-50 dark:bg-neutral-900">
