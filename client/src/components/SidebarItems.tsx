@@ -50,6 +50,11 @@ const SidebarItems: Array<SidebarItem> = [
 		route: "/estadisticas",
 		icon: MdOutlineQueryStats,
 	},
+	{
+		name: "Stock",
+		route: "/stock",
+		icon: MdOutlineQueryStats,
+	},
 ];
 
 export default SidebarItems;
