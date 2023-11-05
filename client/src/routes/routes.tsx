@@ -1,8 +1,9 @@
-import { createBrowserRouter } from "react-router-dom";
-import { Layout } from "../layout";
-import { ErrorNotFound, ErrorHandler } from "../components";
-import NuevoService from "../pages/trabajos/NuevoService";
-import { Clientes, Dashboard, Trabajos, Calendario, Facturacion, Notificaciones, Estadisticas, Login, Signup } from "../pages";
+import { createBrowserRouter } from "react-router-dom"
+import { Layout } from "../layout"
+import { ErrorNotFound, ErrorHandler } from "../components"
+import NuevoService from "../pages/trabajos/NuevoService"
+import { Clientes, Dashboard, Trabajos, Calendario, Notificaciones, Estadisticas, Login, Signup, Facturacion, FiltradoRemito, Stock } from "../pages"
+
 import {
 	postNuevoCliente,
 	FormNuevoCliente,
@@ -65,7 +66,13 @@ const router = createBrowserRouter([
 					{
 						path: "facturacion",
 						element: <Facturacion />,
-					},
+						children: [
+						  {
+							path: "filtrado-remito",
+							element: <FiltradoRemito />,
+						  },
+						],
+					  },
 					{
 						path: "notificaciones",
 						element: <Notificaciones />,
@@ -73,6 +80,10 @@ const router = createBrowserRouter([
 					{
 						path: "estadisticas",
 						element: <Estadisticas />,
+					},
+					{
+						path: "Stock",
+						element: <Stock />,
 					},
 					{
 						path: "/nuevo-service",

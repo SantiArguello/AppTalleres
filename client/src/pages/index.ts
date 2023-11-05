@@ -9,3 +9,6 @@ export { default as Signup } from "./signup/Signup";
 export { default as BotonNuevoService } from "./trabajos/BotonNuevoService";
 export { default as NuevoService } from "./trabajos/NuevoService";
 export { default as Trabajos } from "./trabajos/Trabajos";
+export { default as FiltradoRemito } from "./facturacion/FiltradoRemito";
+export { default as Stock } from "./Stock/Stock";
+
